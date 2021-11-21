@@ -1,9 +1,11 @@
 let pos_latitude;
 let pos_longitude;
-var bikeMap;
+let bikeMap;
+// 站點進階資訊
+let bikeStation_lendData = [];
 
 // 取得附近一公里內 30 筆站點資訊:在地圖上呈現 lend 租車標記 icon
-function getBikeStation_nearby_lend(){
+function getBikeStation_nearby_Data(){
   const endpoint = `https://ptx.transportdata.tw/MOTC/v2/Bike/Station/NearBy?$top=30&$spatialFilter=nearby(${pos_latitude},${pos_longitude},1000)&$format=JSON`;
 
   axios.get(endpoint,
@@ -38,26 +40,13 @@ function getBikeStation_nearby_lend(){
         console.log(el.StationUID);
         console.log(`lat:${lat},lon:${lon},stationName:${stationName}`);
         
-        // 站點圖示
-        let lendIcon = L.divIcon({
-          iconSize: [0,0],
-          iconAnchor: [22, 94],
-          popupAnchor: [-3, -76],
-          html: `
-          <div class="lendIcon">
-            <img src="https://i.imgur.com/FlALjW8.png"/>
-            <div class="bikeNum">
-              <span class="${el.StationUID}"></span>
-            </div>
-          </div`
-        });
-        
         // popUp 內容
         let popUpContent = `
           <p class="fz-5 fw-bold my-4">${stationName}</p>
           <a class="rounded-pill bg-blue text-white py-2 px-3 mb-2" href="https://www.google.com/maps/search/?api=1&map_action=map&zoom=16&query=(${el.StationAddress.Zh_tw})">
             使用 GoogleMap 導航
           </a>
+          <span id="${el.StationUID}_status" class="fz-3 badge py-2 px-2 ms-2"></span>
           <div class="row d-flex">
             <div class="col-6 py-3 fz-3 fw-bold text-center">
               可借車輛
@@ -69,14 +58,29 @@ function getBikeStation_nearby_lend(){
             </div>
           </div>`;
         
-        // 標記站點 icon & 為站點綁上 popUp 彈跳視窗
-        L.marker([lat,lon], {icon: lendIcon}).addTo(bikeMap)
-        .bindPopup().setPopupContent(popUpContent);
+        // 站點圖示
+        let lendIcon = L.divIcon({
+          iconSize: [0,0],
+          iconAnchor: [22, 94],
+          popupAnchor: [-3, -76],
+          html: `
+          <div class="lendIcon">
+            <img src="./assets/images/icons/stationMark_yellow.png"/>
+            <div class="bikeNum">
+              <span class="${el.StationUID}"></span>
+            </div>
+          </div`
+        });
+
+        // 標記站點黃色 icon & 為站點綁上 popUp 彈跳視窗
+        L.marker([lat,lon], {icon: lendIcon})
+        .addTo(bikeMap).bindPopup().setPopupContent(popUpContent);
         
-        // 用 StationUID 查詢站點借還車輛資訊
-        getBikeStation_nearby2_lend(el.StationUID);
+        // 用 StationUID 查詢站點借還車輛資訊，並在 icon 上標記數量
+        iconTag(el.StationUID);
         
       });
+
     })
     .catch(function (error) {
       console.log(error);
@@ -84,9 +88,8 @@ function getBikeStation_nearby_lend(){
 
 }
 
-
-// 取得附近一公里內 30 筆站點資訊:在 icon 上標記 lend 可借車輛數量
-function getBikeStation_nearby2_lend(StationUID){
+// 取得附近一公里內 30 筆站點進階資訊
+function getBikeStation_nearby2_Data(){
   const endpoint = `https://ptx.transportdata.tw/MOTC/v2/Bike/Availability/NearBy?$top=30&$spatialFilter=nearby(${pos_latitude},${pos_longitude},1000)&$format=JSON`;
   axios.get(endpoint,
      {
@@ -94,53 +97,68 @@ function getBikeStation_nearby2_lend(StationUID){
      }
     )
     .then(function (response) {
-      const thisData = response.data;
-      const targetStation = thisData.filter(el=> el.StationUID === StationUID);
-      const stationIcon = document.querySelector(`.${StationUID}`);
-      stationIcon.innerHTML = targetStation[0].AvailableRentBikes;
-      console.log(targetStation[0]);
-      console.log(`可借數量：${targetStation[0].AvailableRentBikes}`);
-      console.log(`還車空位：${targetStation[0].AvailableReturnBikes}`);
+      bikeStation_lendData = response.data;
     })
     .catch(function (error) {
       console.log(error);
     }); 
+}
 
+
+// 在 icon 上標記 lend 可借車輛數量
+function iconTag(StationUID){
+      const targetStation = bikeStation_lendData.filter(el=> el.StationUID === StationUID);
+      const stationIcon = document.querySelector(`.${StationUID}`);
+      if(isLendBike){
+        stationIcon.innerHTML = targetStation[0].AvailableRentBikes;
+      } else {
+        stationIcon.innerHTML = targetStation[0].AvailableReturnBikes;
+      }
+      stationIcon.addEventListener('click',getBikeStation_nearby2_popUp);
 }
 
 
 // 點擊 popUp：呈現借還車輛數量資訊
-function getBikeStation_nearby2_popUp(StationUID){
-  const endpoint = `https://ptx.transportdata.tw/MOTC/v2/Bike/Availability/NearBy?$top=30&$spatialFilter=nearby(${pos_latitude},${pos_longitude},1000)&$format=JSON`;
-  axios.get(endpoint,
-     {
-        headers: getAuthorizationHeader()
-     }
-    )
-    .then(function (response) {
-      const thisData = response.data;
-      const targetStation = thisData.filter(el=> el.StationUID === StationUID);
-      const stationIcon = document.querySelector(`.${StationUID}`);
-      const stationRentBikes = document.getElementById(`${StationUID}_RentBikes`);
-      const stationReturnBikes = document.getElementById(`${StationUID}_ReturnBikes`);
-      stationIcon.innerHTML = targetStation[0].AvailableRentBikes;
-      stationRentBikes.innerHTML = targetStation[0].AvailableRentBikes;
-      stationReturnBikes.innerHTML = targetStation[0].AvailableReturnBikes;
-      console.log(stationIcon);
-      console.log(targetStation[0]);
-      console.log(`可借數量：${targetStation[0].AvailableRentBikes}`);
-      console.log(`還車空位：${targetStation[0].AvailableReturnBikes}`);
-    })
-    .catch(function (error) {
-      console.log(error);
-    }); 
+function getBikeStation_nearby2_popUp(e){
+  // 取點擊站點的 StationUID
+  const StationUID = e.target.getAttribute('Class');
 
+  // 延遲執行抓取 DOM 元素
+  setTimeout(getNums,200);
+  function getNums(){
+    // 站點可借還車輛數量
+    const rentBikes = document.getElementById(`${StationUID}_RentBikes`);
+    const returnBikes = document.getElementById(`${StationUID}_ReturnBikes`);
+    const targetStation = bikeStation_lendData.filter(el=> el.StationUID === StationUID);
+    rentBikes.innerHTML = targetStation[0].AvailableRentBikes;
+    returnBikes.innerHTML = targetStation[0].AvailableReturnBikes;
+    // 站點營運狀態
+    const stationStatus = document.getElementById(`${StationUID}_status`);
+    switch (targetStation[0].ServiceStatus) {
+      // [0:'停止營運',1:'正常營運',2:'暫停營運'] 
+      case 0:
+        stationStatus.innerText = '停止營運';
+        stationStatus.classList.add('bg-danger');
+        break;
+      case 1:
+        stationStatus.innerText = '正常營運';
+        stationStatus.classList.add('bg-success');
+        break;
+      case 2:
+        stationStatus.innerText = '暫停營運';
+        stationStatus.classList.add('bg-dark');
+        break;
+    }
+  }
 }
 
 // 取得使用者所在位置
 function getPosition(){
   // 錯誤訊息處理
   function error(error){
+    // 若出現錯誤，先自動將定位定在台北市中心
+    pos_latitude = 25.04;
+    pos_longitude = 121.54;
     switch(error.code)  {
       case error.PERMISSION_DENIED:
           console.log("User denied the request for Geolocation.");
@@ -163,7 +181,6 @@ function getPosition(){
   function success(pos){
     pos_latitude = pos.coords.latitude;
     pos_longitude = pos.coords.longitude;
-    console.log(`Accuracy：${pos.coords.accuracy}`);
     console.log(pos.coords.latitude,pos.coords.longitude);
   }
   
@@ -171,6 +188,9 @@ function getPosition(){
     // navigator.geolocation.getCurrentPosition(success, error);
     navigator.geolocation.watchPosition(success, error);
   } else {
+    // 若出現錯誤，先自動將定位定在台北市中心
+    pos_latitude = 25.04;
+    pos_longitude = 121.54;
     alert('您的裝置不支援地理位置功能');
   }
 }
@@ -180,6 +200,9 @@ function bike_init(){
   console.log(`pos_latitude：${pos_latitude}`);
   console.log(`pos_longitude：${pos_longitude}`);
   
+  // 取得附近站點進階資訊
+  getBikeStation_nearby2_Data();
+
   // 呈現地圖圖資
   bikeMap = L.map('bikeMap_show', {
       center: [pos_latitude,pos_longitude],
@@ -215,7 +238,7 @@ function bike_init(){
   gpsYoubike.play();
 
   // 標記附近站點 - 可借車輛資訊
-  getBikeStation_nearby_lend();
+  getBikeStation_nearby_Data();
 
 }
 
@@ -223,4 +246,17 @@ function bike_init(){
 window.onload = getPosition();
 
 // Bike 頁面初始渲染：延遲執行地圖載入
-setTimeout(bike_init, 500);
+setTimeout(bike_init, 800);
+
+// 監聽目前欲查詢狀態：租車 or 還車
+let isLendBike = true;
+
+const nav_rentSwitch = document.getElementById('rentSwitch');
+const nav_parkingSwitch = document.getElementById('parkingSwitch');
+const footer_rentSwitch = document.getElementById('footer_rentSwitch');
+const footer_parkingSwitch = document.getElementById('footer_parkingSwitch');
+
+nav_rentSwitch.addEventListener('click',()=>{if(rentSwitch.checked) isLendBike = true;});
+nav_parkingSwitch.addEventListener('click',()=>{if(parkingSwitch.checked) isLendBike = false;});
+footer_rentSwitch.addEventListener('click',()=>{if(footer_rentSwitch.checked) isLendBike = true;});
+footer_parkingSwitch.addEventListener('click',()=>{if(footer_parkingSwitch.checked) isLendBike = false;});
