@@ -42,7 +42,7 @@ function getBikeStation_nearby_Data(){
         
         // popUp 內容
         let popUpContent = `
-          <p class="fz-5 fw-bold my-4">${stationName}</p>
+          <p class="fz-5 fw-bold my-4 me-2">${stationName}</p>
           <a class="rounded-pill bg-blue text-white py-2 px-3 mb-2" href="https://www.google.com/maps/search/?api=1&map_action=map&zoom=16&query=(${el.StationAddress.Zh_tw})">
             使用 GoogleMap 導航
           </a>
