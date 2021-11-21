@@ -27,6 +27,7 @@
   --bs-info: #BEA363;
   --bs-warning: #FF725E;
   --bs-danger: #dc3545;
+  --bs-blue: #0d6efd;
   --bs-light: #E5E5E5;
   --bs-dark: #1F1F1F;
   --bs-white: #ffffff;
@@ -4285,6 +4286,47 @@ fieldset:disabled .btn {
   border-color: #dc3545;
 }
 
+.btn-blue {
+  color: #ffffff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-blue:hover {
+  color: #ffffff;
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+.btn-check:focus + .btn-blue, .btn-blue:focus {
+  color: #ffffff;
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+}
+
+.btn-check:checked + .btn-blue,
+.btn-check:active + .btn-blue, .btn-blue:active, .btn-blue.active,
+.show > .btn-blue.dropdown-toggle {
+  color: #ffffff;
+  background-color: #0a58ca;
+  border-color: #0a53be;
+}
+
+.btn-check:checked + .btn-blue:focus,
+.btn-check:active + .btn-blue:focus, .btn-blue:active:focus, .btn-blue.active:focus,
+.show > .btn-blue.dropdown-toggle:focus {
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+}
+
+.btn-blue:disabled, .btn-blue.disabled {
+  color: #ffffff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
 .btn-light {
   color: #000000;
   background-color: #E5E5E5;
@@ -4650,6 +4692,40 @@ fieldset:disabled .btn {
 
 .btn-outline-danger:disabled, .btn-outline-danger.disabled {
   color: #dc3545;
+  background-color: transparent;
+}
+
+.btn-outline-blue {
+  color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-outline-blue:hover {
+  color: #ffffff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-check:focus + .btn-outline-blue, .btn-outline-blue:focus {
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
+}
+
+.btn-check:checked + .btn-outline-blue,
+.btn-check:active + .btn-outline-blue, .btn-outline-blue:active, .btn-outline-blue.active, .btn-outline-blue.dropdown-toggle.show {
+  color: #ffffff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-check:checked + .btn-outline-blue:focus,
+.btn-check:active + .btn-outline-blue:focus, .btn-outline-blue:active:focus, .btn-outline-blue.active:focus, .btn-outline-blue.dropdown-toggle.show:focus {
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
+}
+
+.btn-outline-blue:disabled, .btn-outline-blue.disabled {
+  color: #0d6efd;
   background-color: transparent;
 }
 
@@ -6436,6 +6512,16 @@ fieldset:disabled .btn {
   color: #6a1a21;
 }
 
+.alert-blue {
+  color: #084298;
+  background-color: #cfe2ff;
+  border-color: #b6d4fe;
+}
+
+.alert-blue .alert-link {
+  color: #06357a;
+}
+
 .alert-light {
   color: #5c5c5c;
   background-color: #fafafa;
@@ -6906,6 +6992,22 @@ fieldset:disabled .btn {
   color: #ffffff;
   background-color: #842029;
   border-color: #842029;
+}
+
+.list-group-item-blue {
+  color: #084298;
+  background-color: #cfe2ff;
+}
+
+.list-group-item-blue.list-group-item-action:hover, .list-group-item-blue.list-group-item-action:focus {
+  color: #084298;
+  background-color: #bacbe6;
+}
+
+.list-group-item-blue.list-group-item-action.active {
+  color: #ffffff;
+  background-color: #084298;
+  border-color: #084298;
 }
 
 .list-group-item-light {
@@ -8171,6 +8273,14 @@ fieldset:disabled .btn {
   color: #b02a37;
 }
 
+.link-blue {
+  color: #0d6efd;
+}
+
+.link-blue:hover, .link-blue:focus {
+  color: #0a58ca;
+}
+
 .link-light {
   color: #E5E5E5;
 }
@@ -8621,6 +8731,10 @@ fieldset:disabled .btn {
 
 .border-danger {
   border-color: #dc3545 !important;
+}
+
+.border-blue {
+  border-color: #0d6efd !important;
 }
 
 .border-light {
@@ -11190,6 +11304,10 @@ fieldset:disabled .btn {
   color: #dc3545 !important;
 }
 
+.text-blue {
+  color: #0d6efd !important;
+}
+
 .text-light {
   color: #E5E5E5 !important;
 }
@@ -11248,6 +11366,10 @@ fieldset:disabled .btn {
 
 .bg-danger {
   background-color: #dc3545 !important;
+}
+
+.bg-blue {
+  background-color: #0d6efd !important;
 }
 
 .bg-light {
@@ -39221,6 +39343,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
 
 #bikeMap_show {
   height: 100vh;
+}
+
+.leaflet-div-icon {
+  background: rgba(255, 255, 255, 0);
+  border: 0;
 }
 
 #lottie_youbike_GPS {

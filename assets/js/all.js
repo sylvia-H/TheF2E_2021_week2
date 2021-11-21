@@ -1,10 +1,10 @@
 "use strict";
 
-var pos_latitude = 25.04;
-var pos_longitude = 121.54;
-var bikeMap; // 取得附近一公里內 30 筆站點資訊
+var pos_latitude;
+var pos_longitude;
+var bikeMap; // 取得附近一公里內 30 筆站點資訊:在地圖上呈現 lend 租車標記 icon
 
-function getBikeStation_nearby() {
+function getBikeStation_nearby_lend() {
   var endpoint = "https://ptx.transportdata.tw/MOTC/v2/Bike/Station/NearBy?$top=30&$spatialFilter=nearby(".concat(pos_latitude, ",").concat(pos_longitude, ",1000)&$format=JSON");
   axios.get(endpoint, {
     headers: getAuthorizationHeader()
@@ -40,24 +40,24 @@ function getBikeStation_nearby() {
         iconSize: [0, 0],
         iconAnchor: [22, 94],
         popupAnchor: [-3, -76],
-        html: "\n          <div class=\"lendIcon\">\n            <img src=\"https://i.imgur.com/FlALjW8.png\"/>\n            <div class=\"bikeNum\">\n              <span class=\"".concat(el.StationUID, "\">55</span>\n            </div>\n          </div")
+        html: "\n          <div class=\"lendIcon\">\n            <img src=\"https://i.imgur.com/FlALjW8.png\"/>\n            <div class=\"bikeNum\">\n              <span class=\"".concat(el.StationUID, "\"></span>\n            </div>\n          </div")
       }); // popUp 內容
 
-      var popUpContent = "\n          ".concat(stationName, "<br>\n          \u7AD9\u9EDE\u8ECA\u8F1B\u7E3D\u6578:").concat(el.BikesCapacity, "<br>\n          \u7AD9\u9EDE\u5730\u5740:").concat(el.StationAddress.Zh_tw, "<br>\n          <a target=\"_blank\" href=\"https://www.google.com/maps/search/?api=1&map_action=map&zoom=16&query=(").concat(el.StationAddress.Zh_tw, ")\">\n          \u4F7F\u7528 GoogleMap \u5C0E\u822A\n          </a>"); // 標記站點 icon & 為站點綁上 popUp 彈跳視窗
+      var popUpContent = "\n          <p class=\"fz-5 fw-bold my-4\">".concat(stationName, "</p>\n          <a class=\"badge rounded-pill bg-blue text-white py-1 px-2 mb-2\" href=\"https://www.google.com/maps/search/?api=1&map_action=map&zoom=16&query=(").concat(el.StationAddress.Zh_tw, ")\">\n            \u4F7F\u7528 GoogleMap \u5C0E\u822A\n          </a>\n          <div class=\"row d-flex\">\n            <div class=\"col-6 py-3 fz-3 fw-bold text-center\">\n              \u53EF\u501F\u8ECA\u8F1B\n              <p id=\"").concat(el.StationUID, "_RentBikes\" class=\"fz-10 fw-bold text-success m-0\"></p>\n            </div>\n            <div class=\"col-6 py-3 fz-3 fw-bold text-center\">\n              \u53EF\u505C\u7A7A\u4F4D\n              <p id=\"").concat(el.StationUID, "_ReturnBikes\" class=\"fz-10 fw-bold text-warning m-0\"></p>\n            </div>\n          </div>"); // 標記站點 icon & 為站點綁上 popUp 彈跳視窗
 
       L.marker([lat, lon], {
         icon: lendIcon
       }).addTo(bikeMap).bindPopup().setPopupContent(popUpContent); // 用 StationUID 查詢站點借還車輛資訊
 
-      getBikeStation_nearby2(el.StationUID);
+      getBikeStation_nearby2_lend(el.StationUID);
     });
   })["catch"](function (error) {
     console.log(error);
   });
-} // 取得附近一公里內 30 筆站點資訊:含借還車輛數量資訊
+} // 取得附近一公里內 30 筆站點資訊:在 icon 上標記 lend 可借車輛數量
 
 
-function getBikeStation_nearby2(StationUID) {
+function getBikeStation_nearby2_lend(StationUID) {
   var endpoint = "https://ptx.transportdata.tw/MOTC/v2/Bike/Availability/NearBy?$top=30&$spatialFilter=nearby(".concat(pos_latitude, ",").concat(pos_longitude, ",1000)&$format=JSON");
   axios.get(endpoint, {
     headers: getAuthorizationHeader()
@@ -68,6 +68,30 @@ function getBikeStation_nearby2(StationUID) {
     });
     var stationIcon = document.querySelector(".".concat(StationUID));
     stationIcon.innerHTML = targetStation[0].AvailableRentBikes;
+    console.log(targetStation[0]);
+    console.log("\u53EF\u501F\u6578\u91CF\uFF1A".concat(targetStation[0].AvailableRentBikes));
+    console.log("\u9084\u8ECA\u7A7A\u4F4D\uFF1A".concat(targetStation[0].AvailableReturnBikes));
+  })["catch"](function (error) {
+    console.log(error);
+  });
+} // 點擊 popUp：呈現借還車輛數量資訊
+
+
+function getBikeStation_nearby2_popUp(StationUID) {
+  var endpoint = "https://ptx.transportdata.tw/MOTC/v2/Bike/Availability/NearBy?$top=30&$spatialFilter=nearby(".concat(pos_latitude, ",").concat(pos_longitude, ",1000)&$format=JSON");
+  axios.get(endpoint, {
+    headers: getAuthorizationHeader()
+  }).then(function (response) {
+    var thisData = response.data;
+    var targetStation = thisData.filter(function (el) {
+      return el.StationUID === StationUID;
+    });
+    var stationIcon = document.querySelector(".".concat(StationUID));
+    var stationRentBikes = document.getElementById("".concat(StationUID, "_RentBikes"));
+    var stationReturnBikes = document.getElementById("".concat(StationUID, "_ReturnBikes"));
+    stationIcon.innerHTML = targetStation[0].AvailableRentBikes;
+    stationRentBikes.innerHTML = targetStation[0].AvailableRentBikes;
+    stationReturnBikes.innerHTML = targetStation[0].AvailableReturnBikes;
     console.log(stationIcon);
     console.log(targetStation[0]);
     console.log("\u53EF\u501F\u6578\u91CF\uFF1A".concat(targetStation[0].AvailableRentBikes));
@@ -113,11 +137,13 @@ function getPosition() {
   } else {
     alert('您的裝置不支援地理位置功能');
   }
-}
+} // Bike 頁面：初始化渲染／呈現地圖圖資／標記 GPS 圖示／標記附近站點
 
-function init() {
+
+function bike_init() {
   console.log("pos_latitude\uFF1A".concat(pos_latitude));
-  console.log("pos_longitude\uFF1A".concat(pos_longitude));
+  console.log("pos_longitude\uFF1A".concat(pos_longitude)); // 呈現地圖圖資
+
   bikeMap = L.map('bikeMap_show', {
     center: [pos_latitude, pos_longitude],
     zoom: 15
@@ -129,22 +155,33 @@ function init() {
     tileSize: 512,
     zoomOffset: -1,
     accessToken: 'pk.eyJ1Ijoic3lsdmlhaC10dyIsImEiOiJja3c2Nzl2eHUweXlmMnFtZTRjb2VjcDQxIn0.Gx5M_zr8rDs4T-jawF2UDQ'
-  }).addTo(bikeMap); // 目前所在位置 GPS 圖示
+  }).addTo(bikeMap); // 目前所在位置 GPS 圖示內容
 
   var posGpsIcon = L.divIcon({
-    iconSize: [60, 60],
-    html: "<div id=\"lottie_youbike_GPS\"></div>"
-  }); // 標記 icon
+    iconSize: [70, 70],
+    html: "<div id=\"lottie_GPS\"></div>"
+  }); // 在地圖上標記所在位置 GPS 圖示
 
-  var marker = L.marker([pos_latitude, pos_longitude]).addTo(bikeMap); // 標記附近站點
+  L.marker([pos_latitude, pos_longitude], {
+    icon: posGpsIcon
+  }).addTo(bikeMap); // 顯示所在位置 GPS 圖示 lottie 動畫
 
-  getBikeStation_nearby();
-} // 初始渲染：取得目前所在位置經緯度座標
+  var gpsYoubike = lottie.loadAnimation({
+    wrapper: lottie_GPS,
+    animType: 'svg',
+    loop: true,
+    autoplay: false,
+    path: './assets/images/youbike_GPS.json'
+  });
+  gpsYoubike.play(); // 標記附近站點 - 可借車輛資訊
+
+  getBikeStation_nearby_lend();
+} // Bike 頁面初始渲染：取得目前所在位置經緯度座標
 
 
-window.onload = getPosition(); // 初始渲染：延遲執行地圖載入
+window.onload = getPosition(); // Bike 頁面初始渲染：延遲執行地圖載入
 
-setTimeout(init, 500);
+setTimeout(bike_init, 500);
 "use strict";
 
 var logoYoubike = lottie.loadAnimation({
@@ -155,14 +192,6 @@ var logoYoubike = lottie.loadAnimation({
   path: './assets/images/youbike.json'
 });
 logoYoubike.play();
-var gpsYoubike = lottie.loadAnimation({
-  wrapper: lottie_youbike_GPS,
-  animType: 'svg',
-  loop: true,
-  autoplay: false,
-  path: './assets/images/youbike_GPS.json'
-});
-gpsYoubike.play();
 "use strict";
 
 // header 驗證
