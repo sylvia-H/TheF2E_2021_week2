@@ -1,0 +1,151 @@
+// 改寫參考：https://www.minwt.com/webdesign-dev/css/22150.html
+
+.switch-route {
+    /* 設定開關鈕的長寬 */
+    position: relative;
+    width: 105px;
+    height: 30px;
+    line-height: 30px;
+    
+    .switch-checkbox {
+        position: absolute;
+        display: none;
+    }
+    .switch-label {
+        display: block;
+        overflow: hidden;
+        cursor: pointer;
+        border-radius: 20px;
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    }
+    .switch-txt {
+        display: block;
+        width: 200%;
+        margin-left: -100%;
+        transition: margin 0.3s ease-in 0s;
+    }
+    .switch-txt::before,
+    .switch-txt::after {
+        display: block;
+        float: right;
+        width: 50%;
+        font-size: 13px;
+        color: #fff;
+        font-weight: bold;
+        box-sizing: border-box;
+    }
+    /* 開關鈕底色(開啟時) */
+    .switch-txt::after {
+        content: attr(turnOn);
+        padding-left: 15px;
+        background: #000;
+        color: #fff;
+    }
+    /* 開關鈕底色(關閉時) */
+    .switch-txt::before {
+        content: attr(turnOff);
+        padding-right: 15px;
+        background: #fff;
+        color: #000;
+        text-align: right;
+    }
+    /* 開關鈕的顏色與大小 */
+    .switch-Round-btn {
+        position: absolute;
+        display: block;
+        width: 26px;
+        height: 26px;
+        margin: 2px;
+        background: #FED801;
+        top: 0;
+        bottom: 0;
+        right: 75px;
+        border-radius: 13px;
+        box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease-in 0s;
+    }
+    .switch-checkbox:checked + .switch-label .switch-txt {
+        margin-left: 0;
+    }
+    .switch-checkbox:checked + .switch-label .switch-Round-btn{
+        background: #fff;
+        right: 0;
+    }
+}
+
+// 頁尾：租車開關
+.footer{
+    &_rentSwitch,&_parkingSwitch {
+        &-label {
+            color: #fff;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        &-radio:checked + label{
+            color: #000;
+            font-weight: bold;
+        }
+    }
+    &_rentSwitch, &_parkingSwitch{
+        &-img_checked{
+            display: none;
+        }
+        &-img{
+            display: block;
+        }
+    }
+    &_rentSwitch, &_parkingSwitch{
+        &-radio {
+            position: absolute;
+            display: none;
+        }
+        &-radio:checked + label{
+            .footer_rentSwitch, .footer_parkingSwitch{
+                &-img{
+                    display: none;
+                }
+                &-img_checked{
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+
+.rentSwitch,.parkingSwitch {
+    &-label {
+        background-color: #fff;
+        color: #000;
+        font-weight: normal;
+        cursor: pointer;
+    }
+    &-radio:checked + label{
+        background-color: #000;
+        color: #FED801;
+        font-weight: bold;
+    }
+    &-img_checked{
+        display: none;
+    }
+    &-img{
+        display: block;
+    }
+    &-radio {
+        position: absolute;
+        display: none;
+    }
+    &-radio:checked + label{
+        .rentSwitch, .parkingSwitch{
+            &-img{
+                display: none;
+            }
+            &-img_checked{
+                display: block;
+            }
+            &-bg{
+                background-color: #000;
+            }
+        }
+    }
+}
