@@ -146,8 +146,8 @@ function bike_init() {
 
   bikeMap = L.map('bikeMap_show', {
     center: [pos_latitude, pos_longitude],
-    zoom: 15
-  }).setView([pos_latitude, pos_longitude], 15);
+    zoom: 16
+  }).setView([pos_latitude, pos_longitude], 16);
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
