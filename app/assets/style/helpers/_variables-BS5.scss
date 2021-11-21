@@ -73,6 +73,7 @@ $success:       #7F977B; // $green !default;
 $info:          #BEA363; // $cyan !default;
 $warning:       #FF725E;   // $yellow !default;
 $danger:        $red !default;
+$blue:          $blue;
 $light:         #E5E5E5; // $gray-100 !default;
 $dark:          #1F1F1F; // $gray-900 !default;
 $white:         #ffffff; // new
@@ -87,6 +88,7 @@ $theme-colors: (
   "info":       $info,
   "warning":    $warning,
   "danger":     $danger,
+  "blue":       $blue,
   "light":      $light,
   "dark":       $dark,
   "white":      $white,
