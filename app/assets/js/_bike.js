@@ -55,7 +55,7 @@ function getBikeStation_nearby_lend(){
         // popUp 內容
         let popUpContent = `
           <p class="fz-5 fw-bold my-4">${stationName}</p>
-          <a class="badge rounded-pill bg-blue text-white py-1 px-2 mb-2" href="https://www.google.com/maps/search/?api=1&map_action=map&zoom=16&query=(${el.StationAddress.Zh_tw})">
+          <a class="rounded-pill bg-blue text-white py-2 px-3 mb-2" href="https://www.google.com/maps/search/?api=1&map_action=map&zoom=16&query=(${el.StationAddress.Zh_tw})">
             使用 GoogleMap 導航
           </a>
           <div class="row d-flex">
