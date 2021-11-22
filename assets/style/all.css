@@ -39345,14 +39345,14 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   position: absolute;
   cursor: pointer;
   right: 5vw;
-  bottom: 9vh;
+  bottom: 7vh;
   z-index: 999;
 }
 
 @media screen and (max-width: 992px) {
   .gps_currentPos {
-    right: 5vw;
-    bottom: 12vh;
+    right: 20px;
+    bottom: 80px;
   }
 }
 
