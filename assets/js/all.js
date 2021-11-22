@@ -17,16 +17,44 @@ var nav_parkingSwitch = document.getElementById('parkingSwitch');
 var footer_rentSwitch = document.getElementById('footer_rentSwitch');
 var footer_parkingSwitch = document.getElementById('footer_parkingSwitch');
 nav_rentSwitch.addEventListener('click', function () {
-  if (rentSwitch.checked) isLendBike = true;
+  isLendBike = true;
+
+  if (returnLayer) {
+    set_lendMarkers();
+    bikeMap.removeLayer(returnLayer);
+  }
+
+  ;
 });
 nav_parkingSwitch.addEventListener('click', function () {
-  if (parkingSwitch.checked) isLendBike = false;
+  isLendBike = false;
+
+  if (lendLayer) {
+    set_returnMarkers();
+    bikeMap.removeLayer(lendLayer);
+  }
+
+  ;
 });
 footer_rentSwitch.addEventListener('click', function () {
-  if (footer_rentSwitch.checked) isLendBike = true;
+  isLendBike = true;
+
+  if (returnLayer) {
+    set_lendMarkers();
+    bikeMap.removeLayer(returnLayer);
+  }
+
+  ;
 });
 footer_parkingSwitch.addEventListener('click', function () {
-  if (footer_parkingSwitch.checked) isLendBike = false;
+  isLendBike = false;
+
+  if (lendLayer) {
+    set_returnMarkers();
+    bikeMap.removeLayer(lendLayer);
+  }
+
+  ;
 }); // markerCluster 合併標記點
 // let lendMarkers;
 // let returnMarkers;
@@ -83,8 +111,7 @@ function getCurrentPos() {
 
 
   function success(pos) {
-    console.log('執行位置重置'); // 獲取目前位置經緯度
-
+    // 獲取目前位置經緯度
     pos_lat = pos.coords.latitude;
     pos_lng = pos.coords.longitude;
     console.log(pos.coords.latitude, pos.coords.longitude); // 設定地圖：以當前座標為中心點
@@ -161,18 +188,7 @@ function get_nearbyAvailability(lat, lng) {
         }
       });
     });
-
-    if (isLendBike) {
-      set_lendMarkers();
-      console.log(isLendBike); // 移除其他圖層
-
-      if (returnLayer) bikeMap.removeLayer(returnLayer);
-    } else {
-      set_returnMarkers();
-      console.log(isLendBike); // 移除其他圖層
-
-      if (lendLayer) bikeMap.removeLayer(lendLayer);
-    }
+    set_lendMarkers();
   })["catch"](function (err) {
     return console.log(err);
   });
