@@ -14,10 +14,34 @@ const nav_parkingSwitch = document.getElementById('parkingSwitch');
 const footer_rentSwitch = document.getElementById('footer_rentSwitch');
 const footer_parkingSwitch = document.getElementById('footer_parkingSwitch');
 
-nav_rentSwitch.addEventListener('click',()=>{if(rentSwitch.checked) isLendBike = true;});
-nav_parkingSwitch.addEventListener('click',()=>{if(parkingSwitch.checked) isLendBike = false;});
-footer_rentSwitch.addEventListener('click',()=>{if(footer_rentSwitch.checked) isLendBike = true;});
-footer_parkingSwitch.addEventListener('click',()=>{if(footer_parkingSwitch.checked) isLendBike = false;});
+nav_rentSwitch.addEventListener('click',()=>{
+  isLendBike = true;
+  if(returnLayer) {
+    set_lendMarkers();
+    bikeMap.removeLayer(returnLayer);
+  };
+});
+nav_parkingSwitch.addEventListener('click',()=>{
+  isLendBike = false;
+  if(lendLayer) {
+    set_returnMarkers();
+    bikeMap.removeLayer(lendLayer);
+  };
+});
+footer_rentSwitch.addEventListener('click',()=>{
+  isLendBike = true;
+  if(returnLayer) {
+    set_lendMarkers();
+    bikeMap.removeLayer(returnLayer);
+  };
+});
+footer_parkingSwitch.addEventListener('click',()=>{
+  isLendBike = false;
+  if(lendLayer) {
+    set_returnMarkers();
+    bikeMap.removeLayer(lendLayer);
+  };
+});
 
 
 // markerCluster 合併標記點
@@ -80,7 +104,6 @@ function getCurrentPos(){
 
   // fun：成功執行
   function success(pos){
-    console.log('執行位置重置');
     // 獲取目前位置經緯度
     pos_lat = pos.coords.latitude;
     pos_lng = pos.coords.longitude;
@@ -167,17 +190,7 @@ function get_nearbyAvailability(lat,lng){
         }
       });
     });
-    if(isLendBike){
-      set_lendMarkers();
-      console.log(isLendBike);
-      // 移除其他圖層
-      if(returnLayer) bikeMap.removeLayer(returnLayer);
-    } else {  
-      set_returnMarkers();
-      console.log(isLendBike);
-      // 移除其他圖層
-      if(lendLayer) bikeMap.removeLayer(lendLayer);
-    }
+    set_lendMarkers();
   })
   .catch(err => console.log(err));
 }
