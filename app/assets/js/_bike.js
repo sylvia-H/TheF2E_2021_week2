@@ -3,6 +3,9 @@ let pos_lat; // 緯度
 let pos_lng; // 經度
 const bikeMap = L.map('map_show').setView([25.04, 121.54], 16);
 
+let height = window.innerHeight;
+window.addEventListener('resize',() => height=window.innerHeight);
+
 // 監聽目前欲查詢狀態：租車 or 還車
 let isLendBike = true;
 
@@ -41,8 +44,8 @@ function getCurrentPos(){
   
   // 先判斷使用者裝置是否有 navigator.geolocation 功能，並執行之
   if(navigator.geolocation){
-      // navigator.geolocation.getCurrentPosition(success, error);
-      navigator.geolocation.watchPosition(success, error);
+      navigator.geolocation.getCurrentPosition(success, error);
+      // navigator.geolocation.watchPosition(success, error);
     } else {
       // 若出現錯誤，先自動將定位定在台北市中心
       pos_lat = 25.04;
@@ -191,7 +194,7 @@ function set_lendMarkers(){
       popupAnchor: [-3, -76],
       html: `
       <div class="lendIcon">
-        <img src="./assets/images/icons/stationMark_yellow.png"/>
+        <img src="./assets/images/icons/stationMark_yellow.svg"/>
         <div class="bikeNum">
           <span>${el.AvailableRentBikes}</span>
         </div>
@@ -265,7 +268,7 @@ function set_returnMarkers(){
       popupAnchor: [-3, -76],
       html: `
       <div class="returnIcon">
-        <img src="./assets/images/icons/stationMark_black.png"/>
+        <img src="./assets/images/icons/stationMark_black.svg"/>
         <div class="bikeNum">
           <span class="text-primary">${el.AvailableReturnBikes}</span>
         </div>
