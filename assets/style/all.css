@@ -39339,6 +39339,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
 
 #map_show {
   height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 .gps_currentPos {
