@@ -5,7 +5,11 @@ var pos_lat; // 緯度
 
 var pos_lng; // 經度
 
-var bikeMap = L.map('map_show').setView([25.04, 121.54], 16); // 監聽目前欲查詢狀態：租車 or 還車
+var bikeMap = L.map('map_show').setView([25.04, 121.54], 16);
+var height = window.innerHeight;
+window.addEventListener('resize', function () {
+  return height = window.innerHeight;
+}); // 監聽目前欲查詢狀態：租車 or 還車
 
 var isLendBike = true;
 var nav_rentSwitch = document.getElementById('rentSwitch');
@@ -44,8 +48,7 @@ gps_currentPos.addEventListener('click', function () {
 function getCurrentPos() {
   // 先判斷使用者裝置是否有 navigator.geolocation 功能，並執行之
   if (navigator.geolocation) {
-    // navigator.geolocation.getCurrentPosition(success, error);
-    navigator.geolocation.watchPosition(success, error);
+    navigator.geolocation.getCurrentPosition(success, error); // navigator.geolocation.watchPosition(success, error);
   } else {
     // 若出現錯誤，先自動將定位定在台北市中心
     pos_lat = 25.04;
@@ -186,7 +189,7 @@ function set_lendMarkers() {
       iconSize: [0, 0],
       iconAnchor: [22, 94],
       popupAnchor: [-3, -76],
-      html: "\n      <div class=\"lendIcon\">\n        <img src=\"./assets/images/icons/stationMark_yellow.png\"/>\n        <div class=\"bikeNum\">\n          <span>".concat(el.AvailableRentBikes, "</span>\n        </div>\n      </div")
+      html: "\n      <div class=\"lendIcon\">\n        <img src=\"./assets/images/icons/stationMark_yellow.svg\"/>\n        <div class=\"bikeNum\">\n          <span>".concat(el.AvailableRentBikes, "</span>\n        </div>\n      </div")
     }); // 站點營運狀態判斷
 
     var stationStatus;
@@ -233,7 +236,7 @@ function set_returnMarkers() {
       iconSize: [0, 0],
       iconAnchor: [22, 94],
       popupAnchor: [-3, -76],
-      html: "\n      <div class=\"returnIcon\">\n        <img src=\"./assets/images/icons/stationMark_black.png\"/>\n        <div class=\"bikeNum\">\n          <span class=\"text-primary\">".concat(el.AvailableReturnBikes, "</span>\n        </div>\n      </div")
+      html: "\n      <div class=\"returnIcon\">\n        <img src=\"./assets/images/icons/stationMark_black.svg\"/>\n        <div class=\"bikeNum\">\n          <span class=\"text-primary\">".concat(el.AvailableReturnBikes, "</span>\n        </div>\n      </div")
     }); // 站點營運狀態判斷
 
     var stationStatus;
