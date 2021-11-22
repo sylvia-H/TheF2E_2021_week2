@@ -39325,8 +39325,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
 
 /* Layout */
 #lottie_youbike {
-  width: 120px;
-  height: 75px;
+  width: 216px;
+  height: 135px;
 }
 
 .index_main {
@@ -39353,7 +39353,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
 @media screen and (max-width: 992px) {
   .gps_currentPos {
     right: 20px;
-    bottom: 80px;
+    top: 80px;
   }
 }
 
