@@ -39337,12 +39337,23 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   margin: -50px;
 }
 
-.map_main {
+#map_show {
   height: 100vh;
 }
 
-#bikeMap_show {
-  height: 100vh;
+.gps_currentPos {
+  position: absolute;
+  cursor: pointer;
+  right: 5vw;
+  bottom: 9vh;
+  z-index: 999;
+}
+
+@media screen and (max-width: 992px) {
+  .gps_currentPos {
+    right: 5vw;
+    bottom: 12vh;
+  }
 }
 
 .leaflet-div-icon {
@@ -39355,11 +39366,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   height: 60px;
 }
 
-.lendIcon {
+.lendIcon, .returnIcon {
   position: relative;
 }
 
-.lendIcon img {
+.lendIcon img, .returnIcon img {
   width: 36px;
   height: 50px;
   position: absolute;
@@ -39367,7 +39378,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   left: 0;
 }
 
-.lendIcon .bikeNum {
+.lendIcon .bikeNum, .returnIcon .bikeNum {
   position: absolute;
   width: 36px;
   height: 36px;
@@ -39376,7 +39387,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   display: table;
 }
 
-.lendIcon .bikeNum span {
+.lendIcon .bikeNum span, .returnIcon .bikeNum span {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
