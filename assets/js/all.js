@@ -5,7 +5,7 @@ var pos_lat; // 緯度
 
 var pos_lng; // 經度
 
-var bikeMap = L.map('map_show').setView([25.04, 121.54], 15); // 監聽目前欲查詢狀態：租車 or 還車
+var bikeMap = L.map('map_show').setView([25.04, 121.54], 16); // 監聽目前欲查詢狀態：租車 or 還車
 
 var isLendBike = true;
 var nav_rentSwitch = document.getElementById('rentSwitch');
