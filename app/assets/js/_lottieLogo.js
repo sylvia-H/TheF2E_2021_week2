@@ -1,3 +1,4 @@
+// 首頁 lottie 動畫圖
 const logoYoubike = lottie.loadAnimation({
     wrapper: lottie_youbike,
     animType: 'svg',
