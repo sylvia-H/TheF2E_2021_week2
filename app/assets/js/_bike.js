@@ -3,7 +3,6 @@ let pos_lat; // 緯度
 let pos_lng; // 經度
 const bikeMap = L.map('map_show').setView([25.04, 121.54], 15);
 
-
 // 監聽目前欲查詢狀態：租車 or 還車
 let isLendBike = true;
 
