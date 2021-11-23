@@ -3287,9 +3287,9 @@ textarea.form-control-lg {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #FED801;
-  background-color: #ffffff;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  color: #ffffff;
+  background-color: #1F1F1F;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 16px 12px;
@@ -3331,7 +3331,7 @@ textarea.form-control-lg {
 
 .form-select:-moz-focusring {
   color: transparent;
-  text-shadow: 0 0 0 #FED801;
+  text-shadow: 0 0 0 #ffffff;
 }
 
 .form-select-sm {
@@ -3848,7 +3848,7 @@ textarea.form-control-lg {
 
 .was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"], .form-select.is-valid:not([multiple]):not([size]), .form-select.is-valid:not([multiple])[size="1"] {
   padding-right: 4.125rem;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%234c8a46' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%234c8a46' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
   background-position: right 0.75rem center, center right 2.25rem;
   background-size: 16px 12px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
@@ -3947,7 +3947,7 @@ textarea.form-control-lg {
 
 .was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"], .form-select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"] {
   padding-right: 4.125rem;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
   background-position: right 0.75rem center, center right 2.25rem;
   background-size: 16px 12px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
@@ -39327,7 +39327,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   display: none;
 }
 
-.switch-route {
+.switch-route, .switch-station {
   /* 設定開關鈕的長寬 */
   position: relative;
   width: 105px;
@@ -39338,12 +39338,12 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   /* 開關鈕的顏色與大小 */
 }
 
-.switch-route .switch-checkbox {
+.switch-route .switch-checkbox, .switch-station .switch-checkbox {
   position: absolute;
   display: none;
 }
 
-.switch-route .switch-label {
+.switch-route .switch-label, .switch-station .switch-label {
   display: block;
   overflow: hidden;
   cursor: pointer;
@@ -39352,7 +39352,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
           box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
 }
 
-.switch-route .switch-txt {
+.switch-route .switch-txt, .switch-station .switch-txt {
   display: block;
   width: 200%;
   margin-left: -100%;
@@ -39362,7 +39362,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
 }
 
 .switch-route .switch-txt::before,
-.switch-route .switch-txt::after {
+.switch-route .switch-txt::after, .switch-station .switch-txt::before,
+.switch-station .switch-txt::after {
   display: block;
   float: right;
   width: 50%;
@@ -39373,14 +39374,14 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
           box-sizing: border-box;
 }
 
-.switch-route .switch-txt::after {
+.switch-route .switch-txt::after, .switch-station .switch-txt::after {
   content: attr(turnOn);
   padding-left: 15px;
   background: #000;
   color: #fff;
 }
 
-.switch-route .switch-txt::before {
+.switch-route .switch-txt::before, .switch-station .switch-txt::before {
   content: attr(turnOff);
   padding-right: 15px;
   background: #fff;
@@ -39388,7 +39389,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   text-align: right;
 }
 
-.switch-route .switch-Round-btn {
+.switch-route .switch-Round-btn, .switch-station .switch-Round-btn {
   position: absolute;
   display: block;
   width: 26px;
@@ -39406,11 +39407,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   transition: all 0.3s ease-in 0s;
 }
 
-.switch-route .switch-checkbox:checked + .switch-label .switch-txt {
+.switch-route .switch-checkbox:checked + .switch-label .switch-txt, .switch-station .switch-checkbox:checked + .switch-label .switch-txt {
   margin-left: 0;
 }
 
-.switch-route .switch-checkbox:checked + .switch-label .switch-Round-btn {
+.switch-route .switch-checkbox:checked + .switch-label .switch-Round-btn, .switch-station .switch-checkbox:checked + .switch-label .switch-Round-btn {
   background: #fff;
   right: 0;
 }
@@ -39445,6 +39446,20 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
 
 .footer_rentSwitch-radio:checked + label .footer_rentSwitch-img_checked, .footer_rentSwitch-radio:checked + label .footer_parkingSwitch-img_checked, .footer_parkingSwitch-radio:checked + label .footer_rentSwitch-img_checked, .footer_parkingSwitch-radio:checked + label .footer_parkingSwitch-img_checked {
   display: block;
+}
+
+#select_city {
+  scrollbar-width: none;
+  /* firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+#select_city::-webkit-scrollbar {
+  display: none;
+  /* Chrome Safari */
 }
 
 /* Layout */
@@ -39518,6 +39533,36 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   text-align: center;
   font-size: 16px;
   font-weight: bold;
+}
+
+@-webkit-keyframes animLine {
+  0% {
+    -webkit-transform: skew(20deg) rotate(0deg);
+            transform: skew(20deg) rotate(0deg);
+  }
+  50% {
+    -webkit-transform: skew(20deg) rotate(180deg);
+            transform: skew(20deg) rotate(180deg);
+  }
+  100% {
+    -webkit-transform: skew(20deg) rotate(360deg);
+            transform: skew(20deg) rotate(360deg);
+  }
+}
+
+@keyframes animLine {
+  0% {
+    -webkit-transform: skew(20deg) rotate(0deg);
+            transform: skew(20deg) rotate(0deg);
+  }
+  50% {
+    -webkit-transform: skew(20deg) rotate(180deg);
+            transform: skew(20deg) rotate(180deg);
+  }
+  100% {
+    -webkit-transform: skew(20deg) rotate(360deg);
+            transform: skew(20deg) rotate(360deg);
+  }
 }
 
 /*# sourceMappingURL=all.css.map */

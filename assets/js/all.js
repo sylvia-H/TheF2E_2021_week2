@@ -307,6 +307,59 @@ function getCurrentPos_route() {
     //   get_nearbyStation(pos_lat,pos_lng);
   }
 }
+
+var cityRoute = [];
+
+function get_cityRoute(city) {
+  var endpoint = "https://ptx.transportdata.tw/MOTC/v2/Cycling/Shape/".concat(city);
+  axios.get(endpoint, {
+    headers: getAuthorizationHeader()
+  }).then(function (response) {
+    cityRoute = response.data;
+    console.log(cityRoute);
+    var str = '<option selected>選擇路線</option>';
+    cityRoute.forEach(function (el) {
+      str += "<option value=\"".concat(el.RouteName, "\">").concat(el.RouteName, "</option>");
+    });
+    select_route.innerHTML = str;
+  })["catch"](function (err) {
+    return console.log(err);
+  });
+}
+
+function get_Route(route) {
+  if (routeLayer) {
+    routeMap.removeLayer(routeLayer);
+  }
+
+  cityRoute.forEach(function (el) {
+    if (el.RouteName === route) {
+      var geo = el.Geometry;
+      polyLine(geo);
+    }
+  });
+} // 畫出自行車的路線
+
+
+var routeLayer = null;
+
+function polyLine(geoData) {
+  // 建立 wkt 的實體
+  var wicket = new Wkt.Wkt();
+  var geojsonFeature = wicket.read(geoData).toJson();
+  console.log(geojsonFeature.coordinates[0][0]); // 預設樣式
+
+  var path = {
+    "color": "#44CCFF",
+    "weight": 16,
+    "opacity": 0.65
+  };
+  var routeLayer = L.geoJSON(geojsonFeature, {
+    style: path
+  }).addTo(routeMap);
+  routeLayer.addData(geojsonFeature);
+  routeMap.fitBounds(routeLayer.getBounds());
+}
 "use strict";
 
 // 取得使用者目前所在位置、載入地圖圖資、標記當前位置
