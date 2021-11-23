@@ -33,44 +33,42 @@
 <!-- 導覽列 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-primary border-bottom | fixed-top | py-3 py-lg-4">
     <div class="container">
-    <!-- 微 笑 單 車 ． 暢 遊 城 市 Where's Youbike-logo -->
-    <a class="navbar-brand mx-0" href="./index.html">
-        <img width="245px" height="47px" class="d-none d-lg-block" src="./assets/images/WheresYoubike_logo.png" alt="WheresYoubike_logo" width="" height="">
-        <span class="material-icons | d-block d-lg-none" alt="WheresYoubike_logo">
-            arrow_back_ios
-        </span>
-    </a>
-    <!-- 租車 or 還車 -->
-    <div class="d-none d-lg-block">
-        <div class="d-flex rounded-pill bg-white">
-            <div class="rentSwitch">
-                <input class="rentSwitch-radio" id="rentSwitch" type="radio" name="RPSwitch" checked>
-                <label class="rentSwitch-label rounded-pill py-2 px-3 d-flex jc-c" for="rentSwitch">
-                    <img class="rentSwitch-img_checked | me-2" src="./assets/images/icons/rentBike_yellow.png" alt="rentBike">
-                    <img class="rentSwitch-img | me-2" src="./assets/images/icons/rentBike_black.png" alt="rentBike">
-                    <span class="rentSwitch-txt">租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
-                </label>
-            </div>
-            <div class="parkingSwitch">
-                <input class="parkingSwitch-radio" id="parkingSwitch" type="radio" name="RPSwitch">
-                <label class="parkingSwitch-label rounded-pill py-2 px-3 d-flex jc-c" for="parkingSwitch">
-                    <img class="parkingSwitch-img | me-2" src="./assets/images/icons/parkingBike_black.png" alt="parkingBike">
-                    <img class="parkingSwitch-img_checked | me-2" src="./assets/images/icons/parkingBike_yellow.png" alt="parkingBike">
-                    <span class="parkingSwitch-txt">還&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
+        <!-- 微 笑 單 車 ． 暢 遊 城 市 Where's Youbike-logo -->
+        <a class="navbar-brand mx-0" href="./index.html">
+            <img width="245px" height="47px" class="d-none d-lg-block" src="./assets/images/WheresYoubike_logo.png" alt="WheresYoubike_logo" width="" height="">
+            <span class="material-icons | d-block d-lg-none" alt="WheresYoubike_logo">
+                arrow_back_ios
+            </span>
+        </a>
+        <!-- 租車 or 還車_滑動按鈕 -->
+        <div class="d-none d-lg-block">
+            <div class="switchRP | d-flex rounded-pill bg-white">
+                <input class="switch-checkbox" id="switchRP" type="checkbox" name="switchRP" checked>
+                <label class="switch-label" for="switchRP">
+                    <span class="switch-bg bg-black rounded-pill py-2 px-3"></span>
+                    <span class="rentSwitch-txt rounded-pill py-2 px-3 d-flex jc-c">
+                        <img class="rentSwitch-img_checked | me-2" src="./assets/images/icons/rentBike_yellow.png" alt="rentBike">
+                        <img class="rentSwitch-img | me-2" src="./assets/images/icons/rentBike_black.png" alt="rentBike">
+                        <span>租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
+                    </span>
+                    <span class="parkingSwitch-txt rounded-pill py-2 px-3 d-flex jc-c">
+                        <img class="parkingSwitch-img | me-2" src="./assets/images/icons/parkingBike_black.png" alt="parkingBike">
+                        <img class="parkingSwitch-img_checked | me-2" src="./assets/images/icons/parkingBike_yellow.png" alt="parkingBike">
+                        <span>還&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
+                    </span>
                 </label>
             </div>
         </div>
-    </div>
-    <!-- 顯示車道 or 隱藏車道 -->
-    <div class="nav">
-        <div class="nav-item | switch-route">
-            <input class="switch-checkbox" id="routeSwitch" type="checkbox" name="routeSwitch">
-            <label class="switch-label" for="routeSwitch">
-                <span class="switch-txt" turnOn="顯示車道" turnOff="隱藏車道"></span>
-                <span class="switch-Round-btn"></span>
-            </label>
+        <!-- 顯示車道 or 隱藏車道 -->
+        <div class="nav">
+            <div class="nav-item | switch-route">
+                <input class="switch-checkbox" id="routeSwitch" type="checkbox" name="routeSwitch">
+                <label class="switch-label" for="routeSwitch">
+                    <span class="switch-txt" turnOn="顯示車道" turnOff="隱藏車道"></span>
+                    <span class="switch-Round-btn"></span>
+                </label>
+            </div>
         </div>
-    </div>
     </div>
 </nav>
 

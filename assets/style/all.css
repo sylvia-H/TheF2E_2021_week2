@@ -39165,6 +39165,87 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
 }
 
 /* Components */
+.switchRP {
+  /* 設定開關鈕的長寬 */
+  position: relative;
+  width: 210px;
+  height: 40px;
+  border-radius: 20px;
+  -webkit-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+          box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  /* 開關鈕的顏色與大小 */
+}
+
+.switchRP .switch-label {
+  cursor: pointer;
+}
+
+.switchRP .switch-checkbox {
+  position: absolute;
+  display: none;
+}
+
+.switchRP .switch-bg {
+  position: absolute;
+  display: block;
+  left: 105px;
+  right: 0;
+  bottom: 0;
+  width: 105px;
+  height: 40px;
+  border-radius: 20px;
+  -webkit-transition: all 0.3s ease-in 0s;
+  -o-transition: all 0.3s ease-in 0s;
+  transition: all 0.3s ease-in 0s;
+}
+
+.switchRP .rentSwitch-txt {
+  color: #000;
+  font-weight: normal;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.switchRP .parkingSwitch-txt {
+  color: #FED801;
+  font-weight: bold;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.switchRP .rentSwitch-img_checked, .switchRP .parkingSwitch-img {
+  display: none;
+}
+
+.switchRP .rentSwitch-img, .switchRP .parkingSwitch-img_checked {
+  display: block;
+}
+
+.switchRP .switch-checkbox:checked + .switch-label .switch-bg {
+  left: 0;
+  right: 105px;
+}
+
+.switchRP .switch-checkbox:checked + .switch-label .rentSwitch-txt {
+  color: #FED801;
+  font-weight: bold;
+}
+
+.switchRP .switch-checkbox:checked + .switch-label .parkingSwitch-txt {
+  color: #000;
+  font-weight: normal;
+}
+
+.switchRP .switch-checkbox:checked + .switch-label .rentSwitch-img_checked, .switchRP .switch-checkbox:checked + .switch-label .parkingSwitch-img {
+  display: block;
+}
+
+.switchRP .switch-checkbox:checked + .switch-label .rentSwitch-img, .switchRP .switch-checkbox:checked + .switch-label .parkingSwitch-img_checked {
+  display: none;
+}
+
 .switch-route {
   /* 設定開關鈕的長寬 */
   position: relative;
@@ -39283,44 +39364,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
 
 .footer_rentSwitch-radio:checked + label .footer_rentSwitch-img_checked, .footer_rentSwitch-radio:checked + label .footer_parkingSwitch-img_checked, .footer_parkingSwitch-radio:checked + label .footer_rentSwitch-img_checked, .footer_parkingSwitch-radio:checked + label .footer_parkingSwitch-img_checked {
   display: block;
-}
-
-.rentSwitch-label, .parkingSwitch-label {
-  background-color: #fff;
-  color: #000;
-  font-weight: normal;
-  cursor: pointer;
-}
-
-.rentSwitch-radio:checked + label, .parkingSwitch-radio:checked + label {
-  background-color: #000;
-  color: #FED801;
-  font-weight: bold;
-}
-
-.rentSwitch-img_checked, .parkingSwitch-img_checked {
-  display: none;
-}
-
-.rentSwitch-img, .parkingSwitch-img {
-  display: block;
-}
-
-.rentSwitch-radio, .parkingSwitch-radio {
-  position: absolute;
-  display: none;
-}
-
-.rentSwitch-radio:checked + label .rentSwitch-img, .rentSwitch-radio:checked + label .parkingSwitch-img, .parkingSwitch-radio:checked + label .rentSwitch-img, .parkingSwitch-radio:checked + label .parkingSwitch-img {
-  display: none;
-}
-
-.rentSwitch-radio:checked + label .rentSwitch-img_checked, .rentSwitch-radio:checked + label .parkingSwitch-img_checked, .parkingSwitch-radio:checked + label .rentSwitch-img_checked, .parkingSwitch-radio:checked + label .parkingSwitch-img_checked {
-  display: block;
-}
-
-.rentSwitch-radio:checked + label .rentSwitch-bg, .rentSwitch-radio:checked + label .parkingSwitch-bg, .parkingSwitch-radio:checked + label .rentSwitch-bg, .parkingSwitch-radio:checked + label .parkingSwitch-bg {
-  background-color: #000;
 }
 
 /* Layout */
