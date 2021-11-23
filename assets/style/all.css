@@ -39246,6 +39246,87 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   display: none;
 }
 
+.switchAF {
+  /* 設定開關鈕的長寬 */
+  position: relative;
+  width: 210px;
+  height: 40px;
+  border-radius: 20px;
+  -webkit-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+          box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  /* 開關鈕的顏色與大小 */
+}
+
+.switchAF .switch-label {
+  cursor: pointer;
+}
+
+.switchAF .switch-checkbox {
+  position: absolute;
+  display: none;
+}
+
+.switchAF .switch-bg {
+  position: absolute;
+  display: block;
+  left: 105px;
+  right: 0;
+  bottom: 0;
+  width: 105px;
+  height: 40px;
+  border-radius: 20px;
+  -webkit-transition: all 0.3s ease-in 0s;
+  -o-transition: all 0.3s ease-in 0s;
+  transition: all 0.3s ease-in 0s;
+}
+
+.switchAF .attractionSwitch-txt {
+  color: #000;
+  font-weight: normal;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.switchAF .foodSwitch-txt {
+  color: #FED801;
+  font-weight: bold;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.switchAF .attractionSwitch-img_checked, .switchAF .foodSwitch-img {
+  display: none;
+}
+
+.switchAF .attractionSwitch-img, .switchAF .foodSwitch-img_checked {
+  display: block;
+}
+
+.switchAF .switch-checkbox:checked + .switch-label .switch-bg {
+  left: 0;
+  right: 105px;
+}
+
+.switchAF .switch-checkbox:checked + .switch-label .attractionSwitch-txt {
+  color: #FED801;
+  font-weight: bold;
+}
+
+.switchAF .switch-checkbox:checked + .switch-label .foodSwitch-txt {
+  color: #000;
+  font-weight: normal;
+}
+
+.switchAF .switch-checkbox:checked + .switch-label .attractionSwitch-img_checked, .switchAF .switch-checkbox:checked + .switch-label .foodSwitch-img {
+  display: block;
+}
+
+.switchAF .switch-checkbox:checked + .switch-label .attractionSwitch-img, .switchAF .switch-checkbox:checked + .switch-label .foodSwitch-img_checked {
+  display: none;
+}
+
 .switch-route {
   /* 設定開關鈕的長寬 */
   position: relative;
@@ -39380,7 +39461,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   margin: -50px;
 }
 
-#map_show {
+#map_show, #map_showRoute, #map_showSpot {
   height: 100vh;
   min-height: -webkit-fill-available;
 }
