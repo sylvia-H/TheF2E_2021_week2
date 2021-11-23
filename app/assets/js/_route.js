@@ -88,4 +88,63 @@ function getCurrentPos_route(){
     }
   
 }
-  
+
+let cityRoute = [];
+function get_cityRoute(city){
+  const endpoint = `https://ptx.transportdata.tw/MOTC/v2/Cycling/Shape/${city}`;
+
+  axios.get(endpoint,
+    {
+      headers: getAuthorizationHeader()
+    })
+  .then(response => {
+    cityRoute = response.data;
+    console.log(cityRoute);
+    let str = '<option selected>選擇路線</option>';
+    cityRoute.forEach(el => {
+      str += `<option value="${el.RouteName}">${el.RouteName}</option>`
+    })
+    select_route.innerHTML = str;
+  })
+  .catch(err => console.log(err));
+
+}
+
+function get_Route(route){
+
+    if(routeLayer) {
+      routeMap.removeLayer(routeLayer);
+    }
+    
+    cityRoute.forEach(el => {
+      if (el.RouteName === route) {
+        const geo = el.Geometry;
+        polyLine(geo);
+      }
+    });
+
+}
+
+
+// 畫出自行車的路線
+let routeLayer = null;
+
+function polyLine(geoData) {
+  // 建立 wkt 的實體
+  const wicket = new Wkt.Wkt();
+  const geojsonFeature = wicket.read(geoData).toJson();
+  console.log(geojsonFeature.coordinates[0][0]);
+  // 預設樣式
+  const path = {
+    "color": "#44CCFF",
+    "weight": 16,
+    "opacity": 0.65
+  };
+  const routeLayer = L.geoJSON(geojsonFeature, {
+    style: path
+  }).addTo(routeMap);
+
+  routeLayer.addData(geojsonFeature);
+  routeMap.fitBounds(routeLayer.getBounds());
+
+}

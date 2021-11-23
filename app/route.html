@@ -37,31 +37,39 @@
                     arrow_back_ios
                 </span>
             </a>
-            <!-- 租車 or 還車_滑動按鈕 -->
-            <div class="d-none d-lg-block position-absolute top-50 start-50 translate-middle">
-                <div class="switchRP | d-flex rounded-pill bg-white">
-                    <input class="switch-checkbox" id="switchRP" type="checkbox" name="switchRP" checked>
-                    <label class="switch-label" for="switchRP">
-                        <span class="switch-bg bg-black rounded-pill py-2 px-3"></span>
-                        <span class="rentSwitch-txt rounded-pill py-2 px-3 d-flex jc-c">
-                            <img class="rentSwitch-img_checked | me-2" src="./assets/images/icons/rentBike_yellow.png" alt="rentBike">
-                            <img class="rentSwitch-img | me-2" src="./assets/images/icons/rentBike_black.png" alt="rentBike">
-                            <span>租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
-                        </span>
-                        <span class="parkingSwitch-txt rounded-pill py-2 px-3 d-flex jc-c">
-                            <img class="parkingSwitch-img | me-2" src="./assets/images/icons/parkingBike_black.png" alt="parkingBike">
-                            <img class="parkingSwitch-img_checked | me-2" src="./assets/images/icons/parkingBike_yellow.png" alt="parkingBike">
-                            <span>還&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
-                        </span>
-                    </label>
-                </div>
-            </div>
+            <select id="select_city" class="form-select form-select-md w-25 rounded-pill py-2 px-3" aria-label=".form-select-sm example">
+                <option selected>選擇縣市</option>
+                <option value="Taipei">臺北市</option>
+                <option value="NewTaipei">新北市</option>
+                <option value="Taoyuan">桃園市</option>
+                <option value="Taichung">臺中市</option>
+                <option value="Tainan">臺南市</option>
+                <option value="Kaohsiung">高雄市</option>
+                <option value="Keelung">基隆市</option>
+                <option value="HsinchuCounty">新竹縣</option>
+                <option value="MiaoliCounty">苗栗縣</option>
+                <option value="ChanghuaCounty">彰化縣</option>
+                <option value="NantouCounty">南投縣</option>
+                <option value="YunlinCounty">雲林縣</option>
+                <option value="ChiayiCounty">嘉義縣</option>
+                <option value="Chiayi">嘉義市</option>
+                <option value="PingtungCounty">屏東縣</option>
+                <option value="YilanCounty">宜蘭縣</option>
+                <option value="HualienCounty">花蓮縣</option>
+                <option value="TaitungCounty">臺東縣</option>
+                <option value="KinmenCounty">金門縣</option>
+                <option value="PenghuCounty">澎湖縣</option>
+            </select>
+            <select id="select_route" class="form-select form-select-md w-25 rounded-pill py-2 px-3" aria-label=".form-select-sm example">
+                <option selected>選擇路線</option>
+                <option value=""></option>
+            </select>
             <!-- 顯示車道 or 隱藏車道 -->
             <div class="nav">
-                <div class="nav-item | switch-route">
-                    <input class="switch-checkbox" id="routeSwitch" type="checkbox" name="routeSwitch">
-                    <label class="switch-label" for="routeSwitch">
-                        <span class="switch-txt" turnOn="顯示車道" turnOff="隱藏車道"></span>
+                <div class="nav-item | switch-station">
+                    <input class="switch-checkbox" id="stationSwitch" type="checkbox" name="stationSwitch">
+                    <label class="switch-label" for="stationSwitch">
+                        <span class="switch-txt" turnOn="顯示站點" turnOff="隱藏站點"></span>
                         <span class="switch-Round-btn"></span>
                     </label>
                 </div>
@@ -78,29 +86,6 @@
 
 
 
-    <footer class="map_footer | bg-primary | py-4 | fixed-bottom d-block d-lg-none">
-        <div class="container">
-            <div class="row">
-                <div class="col-6 text-center">
-                    <input class="footer_rentSwitch-radio" id="footer_rentSwitch" type="radio" name="footer_RPSwitch" checked>
-                    <label class="footer_rentSwitch-label d-flex jc-c" for="footer_rentSwitch">
-                        <img class="footer_rentSwitch-img_checked | me-2" src="./assets/images/icons/rentBike_black.png" alt="rentBike">
-                        <img class="footer_rentSwitch-img | me-2" src="./assets/images/icons/rentBike_white.png" alt="rentBike">
-                        <span class="footer_rentSwitch-txt">租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
-                    </label>
-                </div>
-                <div class="col-6 text-center">
-                    <input class="footer_parkingSwitch-radio" id="footer_parkingSwitch" type="radio" name="footer_RPSwitch">
-                    <label class="footer_parkingSwitch-label d-flex jc-c" for="footer_parkingSwitch">
-                        <img class="footer_parkingSwitch-img | me-2" src="./assets/images/icons/parkingBike_white.png" alt="parkingBike">
-                        <img class="footer_parkingSwitch-img_checked | me-2" src="./assets/images/icons/parkingBike_black.png" alt="parkingBike">
-                        <span class="footer_parkingSwitch-txt">還&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <!-- scripts -->
       <!-- Lottie -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.9/lottie.min.js"></script>
@@ -113,6 +98,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
       <!-- wicket -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wicket/1.3.8/wicket.min.js" integrity="sha512-aaiN+QIXD0N9Id865vSDEfttZJV9v8ZGh7jXMnYI2zbZhkSYOulS4IH0u4pC61/KXT20UedYzL5xi5siIg6mlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://unpkg.com/leaflet-ant-path" type="text/javascript"></script>
       <!-- mine -->
     <script src="./assets/js/vendors.js"></script>
     <script src="./assets/js/all.js"></script>
@@ -134,6 +121,17 @@
 
         // 頁面初始渲染：取得目前所在位置經緯度座標並標記
         window.onload = getCurrentPos_route();
+
+        // 監聽下拉式選單 select_city
+        const select_city = document.getElementById('select_city');
+        select_city.addEventListener('change',(e)=>{
+            get_cityRoute(e.target.value);
+        });
+        // 監聽下拉式選單 select_route
+        const select_route = document.getElementById('select_route');
+        select_route.addEventListener('change',(e)=>{
+            get_Route(e.target.value);
+        });
 
     </script>
   </body>

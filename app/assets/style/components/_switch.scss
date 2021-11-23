@@ -146,7 +146,8 @@
 
 
 // 切換隱藏 & 顯示車道
-.switch-route {
+// 切換隱藏 & 顯示站點
+.switch-route,.switch-station {
     /* 設定開關鈕的長寬 */
     position: relative;
     width: 105px;
