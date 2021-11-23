@@ -1,8 +1,10 @@
-#select_city{
+#select_city,#select_route{
     scrollbar-width: none; /* firefox */
     -ms-overflow-style: none; /* IE 10+ */
     overflow-x: hidden;
     overflow-y: hidden;
+    border: 5px solid #ccc;
+    ;
     &::-webkit-scrollbar {
         display: none; /* Chrome Safari */
     }
