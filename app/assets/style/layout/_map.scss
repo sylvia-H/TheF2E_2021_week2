@@ -1,5 +1,5 @@
 // 地圖圖資綁定的 div
-#map_show { 
+#map_show, #map_showRoute, #map_showSpot{ 
   height: 100vh;
   // 解決手機端下方工具列也吃 100vh 的問題
   min-height: -webkit-fill-available;

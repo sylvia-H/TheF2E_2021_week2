@@ -1,62 +1,10 @@
 // 全域變數
 let pos_lat; // 緯度
 let pos_lng; // 經度
-const bikeMap = L.map('map_show').setView([25.04, 121.54], 16);
-
-let height = window.innerHeight;
-window.addEventListener('resize',() => height=window.innerHeight);
-
-// 監聽目前欲查詢狀態：租車 or 還車
-let isLendBike = true;
-
-const RP_Switch = document.getElementById('switchRP');
-const footer_rentSwitch = document.getElementById('footer_rentSwitch');
-const footer_parkingSwitch = document.getElementById('footer_parkingSwitch');
-
-RP_Switch.addEventListener('click',()=>{
-  if(switchRP.checked) {
-    isLendBike = true;
-    set_lendMarkers();
-    bikeMap.removeLayer(returnLayer);
-  }else{
-    isLendBike = false;
-    set_returnMarkers();
-    bikeMap.removeLayer(lendLayer);
-  }
-});
-footer_rentSwitch.addEventListener('click',()=>{
-  isLendBike = true;
-  if(returnLayer) {
-    set_lendMarkers();
-    bikeMap.removeLayer(returnLayer);
-  };
-});
-footer_parkingSwitch.addEventListener('click',()=>{
-  isLendBike = false;
-  if(lendLayer) {
-    set_returnMarkers();
-    bikeMap.removeLayer(lendLayer);
-  };
-});
-
 
 // markerCluster 合併標記點
 // let lendMarkers;
 // let returnMarkers;
-
-// 頁面初始渲染：取得目前所在位置經緯度座標並標記
-window.onload = getCurrentPos();
-
-// 監聽"附近"圖示，重置當前位置
-const gps_currentPos = document.querySelector('.gps_currentPos');
-gps_currentPos.addEventListener('click',()=>{
-  if(pos_lat && pos_lng){
-    bikeMap.setView([pos_lat,pos_lng], 16);
-  } else {
-    window.opener.location.href=window.opener.location.href;
-    window.opener.location.reload();
-  }
-});
 
 // 取得使用者目前所在位置、載入地圖圖資、標記當前位置
 // 判斷當前頁面導入適當功能

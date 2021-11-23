@@ -1,80 +1,141 @@
----
-title: 查詢自行車道 | Where’s YouBike 微笑單車．暢遊城市
-layout: ./app/layout.ejs
-engine: ejs
-current: route
----
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- 導覽列 -->
-<nav class="navbar navbar-expand-lg navbar-light bg-primary border-bottom | fixed-top | py-3 py-lg-4">
-    <div class="container">
-    <!-- 微 笑 單 車 ． 暢 遊 城 市 Where's Youbike-logo -->
-    <a class="navbar-brand mx-0" href="./index.html">
-        <img width="245px" height="47px" class="d-none d-lg-block" src="./assets/images/WheresYoubike_logo.png" alt="WheresYoubike_logo" width="" height="">
-        <span class="material-icons | d-block d-lg-none" alt="WheresYoubike_logo">
-            arrow_back_ios
-        </span>
-    </a>
-    <!-- 租車 or 還車 -->
-    <div class="d-none d-lg-block">
-        <div class="d-flex rounded-pill bg-white">
-            <div class="rentSwitch">
-                <input class="rentSwitch-radio" id="rentSwitch" type="radio" name="RPSwitch" checked>
-                <label class="rentSwitch-label rounded-pill py-2 px-3 d-flex jc-c" for="rentSwitch">
-                    <img class="rentSwitch-img_checked | me-2" src="./assets/images/icons/rentBike_yellow.png" alt="rentBike">
-                    <img class="rentSwitch-img | me-2" src="./assets/images/icons/rentBike_black.png" alt="rentBike">
-                    <span class="rentSwitch-txt">租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
-                </label>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>查詢自行車道 | Where’s YouBike 微笑單車．暢遊城市</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css"></link> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css"></link> 
+    <link rel="stylesheet" href="./assets/style/all.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GS2N6E9KFT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GS2N6E9KFT');
+    </script>
+  </head>
+
+  <body>
+    <!-- 導覽列 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary border-bottom | fixed-top | py-3 py-lg-4">
+        <div class="container position-relative">
+            <!-- 微 笑 單 車 ． 暢 遊 城 市 Where's Youbike-logo -->
+            <a class="navbar-brand mx-0" href="./index.html">
+                <img width="245px" height="47px" class="d-none d-lg-block" src="./assets/images/WheresYoubike_logo.png" alt="WheresYoubike_logo" width="" height="">
+                <span class="material-icons | d-block d-lg-none" alt="WheresYoubike_logo">
+                    arrow_back_ios
+                </span>
+            </a>
+            <!-- 租車 or 還車_滑動按鈕 -->
+            <div class="d-none d-lg-block position-absolute top-50 start-50 translate-middle">
+                <div class="switchRP | d-flex rounded-pill bg-white">
+                    <input class="switch-checkbox" id="switchRP" type="checkbox" name="switchRP" checked>
+                    <label class="switch-label" for="switchRP">
+                        <span class="switch-bg bg-black rounded-pill py-2 px-3"></span>
+                        <span class="rentSwitch-txt rounded-pill py-2 px-3 d-flex jc-c">
+                            <img class="rentSwitch-img_checked | me-2" src="./assets/images/icons/rentBike_yellow.png" alt="rentBike">
+                            <img class="rentSwitch-img | me-2" src="./assets/images/icons/rentBike_black.png" alt="rentBike">
+                            <span>租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
+                        </span>
+                        <span class="parkingSwitch-txt rounded-pill py-2 px-3 d-flex jc-c">
+                            <img class="parkingSwitch-img | me-2" src="./assets/images/icons/parkingBike_black.png" alt="parkingBike">
+                            <img class="parkingSwitch-img_checked | me-2" src="./assets/images/icons/parkingBike_yellow.png" alt="parkingBike">
+                            <span>還&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
+                        </span>
+                    </label>
+                </div>
             </div>
-            <div class="parkingSwitch">
-                <input class="parkingSwitch-radio" id="parkingSwitch" type="radio" name="RPSwitch">
-                <label class="parkingSwitch-label rounded-pill py-2 px-3 d-flex jc-c" for="parkingSwitch">
-                    <img class="parkingSwitch-img | me-2" src="./assets/images/icons/parkingBike_black.png" alt="parkingBike">
-                    <img class="parkingSwitch-img_checked | me-2" src="./assets/images/icons/parkingBike_yellow.png" alt="parkingBike">
-                    <span class="parkingSwitch-txt">還&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
-                </label>
+            <!-- 顯示車道 or 隱藏車道 -->
+            <div class="nav">
+                <div class="nav-item | switch-route">
+                    <input class="switch-checkbox" id="routeSwitch" type="checkbox" name="routeSwitch">
+                    <label class="switch-label" for="routeSwitch">
+                        <span class="switch-txt" turnOn="顯示車道" turnOff="隱藏車道"></span>
+                        <span class="switch-Round-btn"></span>
+                    </label>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- 顯示車道 or 隱藏車道 -->
-    <div class="nav">
-        <div class="nav-item | switch-route">
-            <input class="switch-checkbox" id="routeSwitch" type="checkbox" name="routeSwitch">
-            <label class="switch-label" for="routeSwitch">
-                <span class="switch-txt" turnOn="顯示車道" turnOff="隱藏車道"></span>
-                <span class="switch-Round-btn"></span>
-            </label>
-        </div>
-    </div>
-    </div>
-</nav>
+    </nav>
 
-<!-- main 主內容區 -->
-<main class="map_main">
+    <!-- main 主內容區 -->
+    <main class="map_main">
+        <div id="map_showRoute">
+            <img class="gps_currentPos" src="./assets/images/icons/GPS_nearby.png" alt="">
+        </div>
+    </main>
+
+
+
+    <footer class="map_footer | bg-primary | py-4 | fixed-bottom d-block d-lg-none">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 text-center">
+                    <input class="footer_rentSwitch-radio" id="footer_rentSwitch" type="radio" name="footer_RPSwitch" checked>
+                    <label class="footer_rentSwitch-label d-flex jc-c" for="footer_rentSwitch">
+                        <img class="footer_rentSwitch-img_checked | me-2" src="./assets/images/icons/rentBike_black.png" alt="rentBike">
+                        <img class="footer_rentSwitch-img | me-2" src="./assets/images/icons/rentBike_white.png" alt="rentBike">
+                        <span class="footer_rentSwitch-txt">租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
+                    </label>
+                </div>
+                <div class="col-6 text-center">
+                    <input class="footer_parkingSwitch-radio" id="footer_parkingSwitch" type="radio" name="footer_RPSwitch">
+                    <label class="footer_parkingSwitch-label d-flex jc-c" for="footer_parkingSwitch">
+                        <img class="footer_parkingSwitch-img | me-2" src="./assets/images/icons/parkingBike_white.png" alt="parkingBike">
+                        <img class="footer_parkingSwitch-img_checked | me-2" src="./assets/images/icons/parkingBike_black.png" alt="parkingBike">
+                        <span class="footer_parkingSwitch-txt">還&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- scripts -->
+      <!-- Lottie -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.9/lottie.min.js"></script>
+      <!-- axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/3.2.0/sha.js"></script>
+      <!-- Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+      <!-- markerCluster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
+      <!-- wicket -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wicket/1.3.8/wicket.min.js" integrity="sha512-aaiN+QIXD0N9Id865vSDEfttZJV9v8ZGh7jXMnYI2zbZhkSYOulS4IH0u4pC61/KXT20UedYzL5xi5siIg6mlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <!-- mine -->
+    <script src="./assets/js/vendors.js"></script>
+    <script src="./assets/js/all.js"></script>
     
-</main>
+    <script>
+        // route 頁面：全域變數
+        const routeMap = L.map('map_showRoute').setView([25.04, 121.54], 16);
 
+        // 監聽"附近"圖示，重置當前位置
+        const gps_currentPos = document.querySelector('.gps_currentPos');
+        gps_currentPos.addEventListener('click',()=>{
+            if(pos_lat && pos_lng){
+                routeMap.setView([pos_lat,pos_lng], 16);
+            } else {
+                window.opener.location.href=window.opener.location.href;
+                window.opener.location.reload();
+            }
+        });
 
+        // 頁面初始渲染：取得目前所在位置經緯度座標並標記
+        window.onload = getCurrentPos_route();
 
-<footer class="map_footer | bg-primary | py-4 | fixed-bottom d-block d-lg-none">
-    <div class="container">
-        <div class="row">
-            <div class="col-6 text-center">
-                <input class="footer_rentSwitch-radio" id="footer_rentSwitch" type="radio" name="footer_RPSwitch" checked>
-                <label class="footer_rentSwitch-label d-flex jc-c" for="footer_rentSwitch">
-                    <img class="footer_rentSwitch-img_checked | me-2" src="./assets/images/icons/rentBike_black.png" alt="rentBike">
-                    <img class="footer_rentSwitch-img | me-2" src="./assets/images/icons/rentBike_white.png" alt="rentBike">
-                    <span class="footer_rentSwitch-txt">租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
-                </label>
-            </div>
-            <div class="col-6 text-center">
-                <input class="footer_parkingSwitch-radio" id="footer_parkingSwitch" type="radio" name="footer_RPSwitch">
-                <label class="footer_parkingSwitch-label d-flex jc-c" for="footer_parkingSwitch">
-                    <img class="footer_parkingSwitch-img | me-2" src="./assets/images/icons/parkingBike_white.png" alt="parkingBike">
-                    <img class="footer_parkingSwitch-img_checked | me-2" src="./assets/images/icons/parkingBike_black.png" alt="parkingBike">
-                    <span class="footer_parkingSwitch-txt">還&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;車</span>
-                </label>
-            </div>
-        </div>
-    </div>
-</footer>
+    </script>
+  </body>
+
+</html>

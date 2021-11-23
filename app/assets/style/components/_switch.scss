@@ -72,6 +72,78 @@
     }
 }
 
+// 切換景點 & 美食
+.switchAF{
+    /* 設定開關鈕的長寬 */
+    position: relative;
+    width: 210px;
+    height: 40px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    .switch-label{
+        cursor: pointer;
+    }
+
+    .switch-checkbox {
+        position: absolute;
+        display: none;
+    }
+    
+    /* 開關鈕的顏色與大小 */
+    .switch-bg {
+        position: absolute;
+        display: block;
+        left: 105px;
+        right: 0;
+        bottom: 0;
+        width: 105px;
+        height: 40px;
+        border-radius: 20px;
+        transition: all 0.3s ease-in 0s;
+    }
+    .attractionSwitch-txt{
+        color: #000;
+        font-weight: normal;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
+    .foodSwitch-txt{
+        color: #FED801;
+        font-weight: bold;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+    .attractionSwitch-img_checked,.foodSwitch-img{
+        display: none;
+    }
+    .attractionSwitch-img,.foodSwitch-img_checked{
+        display: block;
+    }
+    
+    .switch-checkbox:checked + .switch-label {
+        .switch-bg {
+            left: 0;
+            right: 105px;
+        }
+        .attractionSwitch-txt{
+            color: #FED801;
+            font-weight: bold;
+        }
+        .foodSwitch-txt{
+            color: #000;
+            font-weight: normal;
+        }
+        .attractionSwitch-img_checked,.foodSwitch-img{
+            display: block;
+        }
+        .attractionSwitch-img,.foodSwitch-img_checked{
+            display: none;
+        }
+    }
+}
+
 
 // 切換隱藏 & 顯示車道
 .switch-route {
