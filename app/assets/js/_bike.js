@@ -9,24 +9,20 @@ window.addEventListener('resize',() => height=window.innerHeight);
 // 監聽目前欲查詢狀態：租車 or 還車
 let isLendBike = true;
 
-const nav_rentSwitch = document.getElementById('rentSwitch');
-const nav_parkingSwitch = document.getElementById('parkingSwitch');
+const RP_Switch = document.getElementById('switchRP');
 const footer_rentSwitch = document.getElementById('footer_rentSwitch');
 const footer_parkingSwitch = document.getElementById('footer_parkingSwitch');
 
-nav_rentSwitch.addEventListener('click',()=>{
-  isLendBike = true;
-  if(returnLayer) {
+RP_Switch.addEventListener('click',()=>{
+  if(switchRP.checked) {
+    isLendBike = true;
     set_lendMarkers();
     bikeMap.removeLayer(returnLayer);
-  };
-});
-nav_parkingSwitch.addEventListener('click',()=>{
-  isLendBike = false;
-  if(lendLayer) {
+  }else{
+    isLendBike = false;
     set_returnMarkers();
     bikeMap.removeLayer(lendLayer);
-  };
+  }
 });
 footer_rentSwitch.addEventListener('click',()=>{
   isLendBike = true;
