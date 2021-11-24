@@ -280,7 +280,7 @@ function getCurrentPos_route() {
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 19,
+      maxZoom: 17,
       id: 'mapbox/streets-v11',
       tileSize: 512,
       zoomOffset: -1,
@@ -402,7 +402,7 @@ function polyLine(geoData, routeInfo) {
     popupAnchor: [-3, -76]
   }); // popUp 內容
 
-  var popUpContent = "\n  <p class=\"fz-5 fw-bold my-4 me-2\">".concat(routeInfo.RouteName, "</p>\n  <p class=\"fz-4 text-gray\">").concat(routeInfo.Direction ? routeInfo.Direction : '', " ").concat((parseInt(routeInfo.CyclingLength) / 1000).toFixed(1), " \u516C\u91CC</p>\n  <div class=\"fz-4 fw-bold d-flex\">\n    \u8DEF\u7DDA\u8D77\u9EDE\uFF1A\n    <span class=\"fz-4 fw-normal\">\n      ").concat(routeInfo.RoadSectionStart, "\n    </span>\n  </div>\n  <div class=\"fz-4 fw-bold d-flex\">\n    \u8DEF\u7DDA\u8FC4\u9EDE\uFF1A\n    <span class=\"fz-4 fw-normal\">\n      ").concat(routeInfo.RoadSectionEnd, "\n    </span>\n  </div>"); // 標記起訖站點 & 為站點綁上 popUp 彈跳視窗
+  var popUpContent = "\n  <p class=\"fz-5 fw-bold my-4 me-2\">".concat(routeInfo.RouteName, "</p>\n  <p class=\"fz-4 text-gray\">").concat(routeInfo.Direction ? routeInfo.Direction : '', " ").concat((parseInt(routeInfo.CyclingLength) / 1000).toFixed(1), " \u516C\u91CC</p>\n  <div class=\"fz-4 fw-bold d-flex\">\n    \u8DEF\u7DDA\u8D77\u9EDE\uFF1A\n    <span class=\"fz-4 fw-normal\">\n      ").concat(routeInfo.RoadSectionStart ? routeInfo.RoadSectionStart : '資料未註明', "\n    </span>\n  </div>\n  <div class=\"fz-4 fw-bold d-flex\">\n    \u8DEF\u7DDA\u8FC4\u9EDE\uFF1A\n    <span class=\"fz-4 fw-normal\">\n      ").concat(routeInfo.RoadSectionEnd ? routeInfo.RoadSectionEnd : '資料未註明', "\n    </span>\n  </div>"); // 標記起訖站點 & 為站點綁上 popUp 彈跳視窗
 
   routeInfoLayer = L.marker(pathData[0], {
     icon: startIcon
