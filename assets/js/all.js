@@ -332,33 +332,86 @@ function get_Route(route) {
     routeMap.removeLayer(routeLayer);
   }
 
-  cityRoute.forEach(function (el) {
-    if (el.RouteName === route) {
-      var geo = el.Geometry;
-      polyLine(geo);
+  if (routeInfoLayer) {
+    routeMap.removeLayer(routeInfoLayer);
+  }
+
+  if (routeEndLayer) {
+    routeMap.removeLayer(routeEndLayer);
+  }
+
+  cityRoute.forEach(function (item) {
+    if (item.RouteName === route) {
+      var geo = item.Geometry;
+      polyLine(geo, item);
     }
   });
 } // 畫出自行車的路線
 
 
-var routeLayer = null;
+var routeLayer = null; // 標記自行車路線起訖點與路線資訊
 
-function polyLine(geoData) {
+var routeInfoLayer = null;
+var routeEndLayer = null;
+
+function polyLine(geoData, routeInfo) {
   // 建立 wkt 的實體
   var wicket = new Wkt.Wkt();
-  var geojsonFeature = wicket.read(geoData).toJson();
-  console.log(geojsonFeature.coordinates[0][0]); // 預設樣式
+  var geojsonFeature = wicket.read(geoData).toJson(); // 傳統繪製路線寫法
+  // const path = {
+  //   "color": "#44CCFF",
+  //   "weight": 15,
+  //   "opacity": 0.65
+  // };
+  // const routeLayer = L.geoJSON(geojsonFeature, {
+  //   style: path
+  // }).addTo(routeMap);
+  // routeLayer.addData(geojsonFeature);
+  // routeMap.fitBounds(routeLayer.getBounds());
 
-  var path = {
-    "color": "#44CCFF",
-    "weight": 16,
-    "opacity": 0.65
+  console.log(geojsonFeature.coordinates[0][0]); // geojsonFeature 資料是先經度再緯度，需要轉換
+  // 用 leaflet-ant-path 套件繪製動態路徑
+
+  var pathData = geojsonFeature.coordinates[0].map(function (el) {
+    return el.reverse();
+  });
+  var pathStyle = {
+    "delay": 800,
+    "dashArray": [10, 25],
+    "weight": 8,
+    "color": "#000000",
+    "pulseColor": "#EDFA03",
+    "paused": false,
+    "reverse": false,
+    "hardwareAccelerated": true
   };
-  var routeLayer = L.geoJSON(geojsonFeature, {
-    style: path
-  }).addTo(routeMap);
-  routeLayer.addData(geojsonFeature);
-  routeMap.fitBounds(routeLayer.getBounds());
+  routeLayer = new L.Polyline.AntPath(pathData, pathStyle);
+  routeLayer.addTo(routeMap);
+  routeMap.fitBounds(routeLayer.getBounds()); // 站點圖示
+
+  var startIcon = L.icon({
+    iconUrl: './assets/images/icons/routeStart.png',
+    iconSize: [36, 50],
+    iconAnchor: [25, 45],
+    popupAnchor: [-3, -76]
+  });
+  var endIcon = L.icon({
+    iconUrl: './assets/images/icons/routeEnd.png',
+    iconSize: [36, 50],
+    iconAnchor: [25, 45],
+    popupAnchor: [-3, -76]
+  }); // popUp 內容
+
+  var popUpContent = "\n  <p class=\"fz-5 fw-bold my-4 me-2\">".concat(routeInfo.RouteName, "</p>\n  <p class=\"fz-4 text-gray\">").concat(routeInfo.Direction ? routeInfo.Direction : '', " ").concat((parseInt(routeInfo.CyclingLength) / 1000).toFixed(1), " \u516C\u91CC</p>\n  <div class=\"fz-4 fw-bold d-flex\">\n    \u8DEF\u7DDA\u8D77\u9EDE\uFF1A\n    <span class=\"fz-4 fw-normal\">\n      ").concat(routeInfo.RoadSectionStart, "\n    </span>\n  </div>\n  <div class=\"fz-4 fw-bold d-flex\">\n    \u8DEF\u7DDA\u8FC4\u9EDE\uFF1A\n    <span class=\"fz-4 fw-normal\">\n      ").concat(routeInfo.RoadSectionEnd, "\n    </span>\n  </div>"); // 標記起訖站點 & 為站點綁上 popUp 彈跳視窗
+
+  routeInfoLayer = L.marker(pathData[0], {
+    icon: startIcon
+  }).bindPopup().setPopupContent(popUpContent);
+  routeInfoLayer.addTo(routeMap).openPopup();
+  routeEndLayer = L.marker(pathData[pathData.length - 1], {
+    icon: endIcon
+  });
+  routeEndLayer.addTo(routeMap);
 }
 "use strict";
 

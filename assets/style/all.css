@@ -30,6 +30,7 @@
   --bs-blue: #0d6efd;
   --bs-light: #E5E5E5;
   --bs-dark: #1F1F1F;
+  --bs-gray: #7A7A7A;
   --bs-white: #ffffff;
   --bs-black: #000000;
   --bs-font-sans-serif: "Roboto", "Noto Sans TC", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -4409,6 +4410,47 @@ fieldset:disabled .btn {
   border-color: #1F1F1F;
 }
 
+.btn-gray {
+  color: #000000;
+  background-color: #7A7A7A;
+  border-color: #7A7A7A;
+}
+
+.btn-gray:hover {
+  color: #000000;
+  background-color: #8e8e8e;
+  border-color: #878787;
+}
+
+.btn-check:focus + .btn-gray, .btn-gray:focus {
+  color: #000000;
+  background-color: #8e8e8e;
+  border-color: #878787;
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(104, 104, 104, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(104, 104, 104, 0.5);
+}
+
+.btn-check:checked + .btn-gray,
+.btn-check:active + .btn-gray, .btn-gray:active, .btn-gray.active,
+.show > .btn-gray.dropdown-toggle {
+  color: #000000;
+  background-color: #959595;
+  border-color: #878787;
+}
+
+.btn-check:checked + .btn-gray:focus,
+.btn-check:active + .btn-gray:focus, .btn-gray:active:focus, .btn-gray.active:focus,
+.show > .btn-gray.dropdown-toggle:focus {
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(104, 104, 104, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(104, 104, 104, 0.5);
+}
+
+.btn-gray:disabled, .btn-gray.disabled {
+  color: #000000;
+  background-color: #7A7A7A;
+  border-color: #7A7A7A;
+}
+
 .btn-white {
   color: #000000;
   background-color: #ffffff;
@@ -4794,6 +4836,40 @@ fieldset:disabled .btn {
 
 .btn-outline-dark:disabled, .btn-outline-dark.disabled {
   color: #1F1F1F;
+  background-color: transparent;
+}
+
+.btn-outline-gray {
+  color: #7A7A7A;
+  border-color: #7A7A7A;
+}
+
+.btn-outline-gray:hover {
+  color: #000000;
+  background-color: #7A7A7A;
+  border-color: #7A7A7A;
+}
+
+.btn-check:focus + .btn-outline-gray, .btn-outline-gray:focus {
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(122, 122, 122, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(122, 122, 122, 0.5);
+}
+
+.btn-check:checked + .btn-outline-gray,
+.btn-check:active + .btn-outline-gray, .btn-outline-gray:active, .btn-outline-gray.active, .btn-outline-gray.dropdown-toggle.show {
+  color: #000000;
+  background-color: #7A7A7A;
+  border-color: #7A7A7A;
+}
+
+.btn-check:checked + .btn-outline-gray:focus,
+.btn-check:active + .btn-outline-gray:focus, .btn-outline-gray:active:focus, .btn-outline-gray.active:focus, .btn-outline-gray.dropdown-toggle.show:focus {
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(122, 122, 122, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(122, 122, 122, 0.5);
+}
+
+.btn-outline-gray:disabled, .btn-outline-gray.disabled {
+  color: #7A7A7A;
   background-color: transparent;
 }
 
@@ -6542,6 +6618,16 @@ fieldset:disabled .btn {
   color: #0f0f0f;
 }
 
+.alert-gray {
+  color: #494949;
+  background-color: #e4e4e4;
+  border-color: #d7d7d7;
+}
+
+.alert-gray .alert-link {
+  color: #3a3a3a;
+}
+
 .alert-white {
   color: #666666;
   background-color: white;
@@ -7040,6 +7126,22 @@ fieldset:disabled .btn {
   color: #ffffff;
   background-color: #131313;
   border-color: #131313;
+}
+
+.list-group-item-gray {
+  color: #494949;
+  background-color: #e4e4e4;
+}
+
+.list-group-item-gray.list-group-item-action:hover, .list-group-item-gray.list-group-item-action:focus {
+  color: #494949;
+  background-color: #cdcdcd;
+}
+
+.list-group-item-gray.list-group-item-action.active {
+  color: #ffffff;
+  background-color: #494949;
+  border-color: #494949;
 }
 
 .list-group-item-white {
@@ -8297,6 +8399,14 @@ fieldset:disabled .btn {
   color: #191919;
 }
 
+.link-gray {
+  color: #7A7A7A;
+}
+
+.link-gray:hover, .link-gray:focus {
+  color: #959595;
+}
+
 .link-white {
   color: #ffffff;
 }
@@ -8743,6 +8853,10 @@ fieldset:disabled .btn {
 
 .border-dark {
   border-color: #1F1F1F !important;
+}
+
+.border-gray {
+  border-color: #7A7A7A !important;
 }
 
 .border-white {
@@ -11316,6 +11430,10 @@ fieldset:disabled .btn {
   color: #1F1F1F !important;
 }
 
+.text-gray {
+  color: #7A7A7A !important;
+}
+
 .text-white {
   color: #ffffff !important;
 }
@@ -11378,6 +11496,10 @@ fieldset:disabled .btn {
 
 .bg-dark {
   background-color: #1F1F1F !important;
+}
+
+.bg-gray {
+  background-color: #7A7A7A !important;
 }
 
 .bg-white {
