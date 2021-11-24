@@ -221,8 +221,10 @@
 }
 
 // 頁尾：租車開關
+// 頁尾：景點/美食開關
 .footer{
-    &_rentSwitch,&_parkingSwitch {
+    &_rentSwitch,&_parkingSwitch,
+    &_attractionSwitch,&_foodSwitch {
         &-label {
             color: #fff;
             font-weight: normal;
@@ -233,7 +235,8 @@
             font-weight: bold;
         }
     }
-    &_rentSwitch, &_parkingSwitch{
+    &_rentSwitch, &_parkingSwitch,
+    &_attractionSwitch,&_foodSwitch{
         &-img_checked{
             display: none;
         }
@@ -241,13 +244,15 @@
             display: block;
         }
     }
-    &_rentSwitch, &_parkingSwitch{
+    &_rentSwitch, &_parkingSwitch,
+    &_attractionSwitch,&_foodSwitch{
         &-radio {
             position: absolute;
             display: none;
         }
         &-radio:checked + label{
-            .footer_rentSwitch, .footer_parkingSwitch{
+            .footer_rentSwitch, .footer_parkingSwitch,
+            .footer_attractionSwitch, .footer_foodSwitch{
                 &-img{
                     display: none;
                 }
