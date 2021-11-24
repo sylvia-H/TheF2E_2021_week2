@@ -76,6 +76,7 @@ $danger:        $red !default;
 $blue:          $blue;
 $light:         #E5E5E5; // $gray-100 !default;
 $dark:          #1F1F1F; // $gray-900 !default;
+$gray:          #7A7A7A; // new
 $white:         #ffffff; // new
 $black:         #000000; // new
 // scss-docs-end theme-color-variables
@@ -91,6 +92,7 @@ $theme-colors: (
   "blue":       $blue,
   "light":      $light,
   "dark":       $dark,
+  "gray":       $gray,
   "white":      $white,
   "black":      $black
 ) !default;
