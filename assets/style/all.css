@@ -39538,35 +39538,43 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p {
   right: 0;
 }
 
-.footer_rentSwitch-label, .footer_parkingSwitch-label {
+.footer_rentSwitch-label, .footer_parkingSwitch-label, .footer_attractionSwitch-label, .footer_foodSwitch-label {
   color: #fff;
   font-weight: normal;
   cursor: pointer;
 }
 
-.footer_rentSwitch-radio:checked + label, .footer_parkingSwitch-radio:checked + label {
+.footer_rentSwitch-radio:checked + label, .footer_parkingSwitch-radio:checked + label, .footer_attractionSwitch-radio:checked + label, .footer_foodSwitch-radio:checked + label {
   color: #000;
   font-weight: bold;
 }
 
-.footer_rentSwitch-img_checked, .footer_parkingSwitch-img_checked {
+.footer_rentSwitch-img_checked, .footer_parkingSwitch-img_checked, .footer_attractionSwitch-img_checked, .footer_foodSwitch-img_checked {
   display: none;
 }
 
-.footer_rentSwitch-img, .footer_parkingSwitch-img {
+.footer_rentSwitch-img, .footer_parkingSwitch-img, .footer_attractionSwitch-img, .footer_foodSwitch-img {
   display: block;
 }
 
-.footer_rentSwitch-radio, .footer_parkingSwitch-radio {
+.footer_rentSwitch-radio, .footer_parkingSwitch-radio, .footer_attractionSwitch-radio, .footer_foodSwitch-radio {
   position: absolute;
   display: none;
 }
 
-.footer_rentSwitch-radio:checked + label .footer_rentSwitch-img, .footer_rentSwitch-radio:checked + label .footer_parkingSwitch-img, .footer_parkingSwitch-radio:checked + label .footer_rentSwitch-img, .footer_parkingSwitch-radio:checked + label .footer_parkingSwitch-img {
+.footer_rentSwitch-radio:checked + label .footer_rentSwitch-img, .footer_rentSwitch-radio:checked + label .footer_parkingSwitch-img,
+.footer_rentSwitch-radio:checked + label .footer_attractionSwitch-img, .footer_rentSwitch-radio:checked + label .footer_foodSwitch-img, .footer_parkingSwitch-radio:checked + label .footer_rentSwitch-img, .footer_parkingSwitch-radio:checked + label .footer_parkingSwitch-img,
+.footer_parkingSwitch-radio:checked + label .footer_attractionSwitch-img, .footer_parkingSwitch-radio:checked + label .footer_foodSwitch-img, .footer_attractionSwitch-radio:checked + label .footer_rentSwitch-img, .footer_attractionSwitch-radio:checked + label .footer_parkingSwitch-img,
+.footer_attractionSwitch-radio:checked + label .footer_attractionSwitch-img, .footer_attractionSwitch-radio:checked + label .footer_foodSwitch-img, .footer_foodSwitch-radio:checked + label .footer_rentSwitch-img, .footer_foodSwitch-radio:checked + label .footer_parkingSwitch-img,
+.footer_foodSwitch-radio:checked + label .footer_attractionSwitch-img, .footer_foodSwitch-radio:checked + label .footer_foodSwitch-img {
   display: none;
 }
 
-.footer_rentSwitch-radio:checked + label .footer_rentSwitch-img_checked, .footer_rentSwitch-radio:checked + label .footer_parkingSwitch-img_checked, .footer_parkingSwitch-radio:checked + label .footer_rentSwitch-img_checked, .footer_parkingSwitch-radio:checked + label .footer_parkingSwitch-img_checked {
+.footer_rentSwitch-radio:checked + label .footer_rentSwitch-img_checked, .footer_rentSwitch-radio:checked + label .footer_parkingSwitch-img_checked,
+.footer_rentSwitch-radio:checked + label .footer_attractionSwitch-img_checked, .footer_rentSwitch-radio:checked + label .footer_foodSwitch-img_checked, .footer_parkingSwitch-radio:checked + label .footer_rentSwitch-img_checked, .footer_parkingSwitch-radio:checked + label .footer_parkingSwitch-img_checked,
+.footer_parkingSwitch-radio:checked + label .footer_attractionSwitch-img_checked, .footer_parkingSwitch-radio:checked + label .footer_foodSwitch-img_checked, .footer_attractionSwitch-radio:checked + label .footer_rentSwitch-img_checked, .footer_attractionSwitch-radio:checked + label .footer_parkingSwitch-img_checked,
+.footer_attractionSwitch-radio:checked + label .footer_attractionSwitch-img_checked, .footer_attractionSwitch-radio:checked + label .footer_foodSwitch-img_checked, .footer_foodSwitch-radio:checked + label .footer_rentSwitch-img_checked, .footer_foodSwitch-radio:checked + label .footer_parkingSwitch-img_checked,
+.footer_foodSwitch-radio:checked + label .footer_attractionSwitch-img_checked, .footer_foodSwitch-radio:checked + label .footer_foodSwitch-img_checked {
   display: block;
 }
 
